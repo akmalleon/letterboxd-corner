@@ -1,7 +1,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- Tambahan CSS Khusus untuk Animasi Berjalan, Hover GIF, dan Efek Nyala Api -->
+<!-- Tambahan CSS Khusus untuk Animasi Berjalan, Hover GIF, Efek Nyala Api, dan Pemangkasan Celah Putih -->
 <style>
   @keyframes marquee {
     0% { transform: translateX(0%); }
@@ -59,14 +59,14 @@
   }
 </style>
 
-<!-- Wrapper utama diubah agar langsung mengisi latar belakang gelap tanpa celah putih -->
-<div style="background-color: #14181c; width: 100%; margin: 0; padding: 0;">
+<!-- Wrapper utama dengan teknik negative margin untuk menutup sisa padding bawaan Lynk.id -->
+<div style="background-color: #14181c; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; margin-top: -30px; padding-top: 20px;">
   <section class="relative text-[#9ab] overflow-hidden py-12 md:py-20 px-4 sm:px-6 lg:px-8 font-sans">
     
     <!-- Background GIF with Absolute Fixed True Autoplay -->
     <div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; overflow: hidden; background-color: #14181c;">
       <img 
-        src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeW1tYzR3dW5icDE1MzhpZmw0MXk0eGNmYmdheDFna3ZlaHBtMHBqZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQ9Zw/8Q31McooUHTNu/giphy.gif" 
+        src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeW1tYzR3dW5icDE1MzhpZmw0MXk0eGNmYmdheDFna3ZlaHBtMHBqZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/8Q31McooUHTNu/giphy.gif" 
         alt="Background GIF" 
         style="width: 100%; height: 100%; object-fit: cover; transform: scale(1.05); filter: blur(4px); opacity: 0.2;"
       />
@@ -95,7 +95,7 @@
         </div>
         <img 
           id="vinylImg"
-          src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDNqb2JoNjIzczhib3M3YTdweXRhd3R5djZobWJjYTVsNzV6cWx4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQ9Zw/cPa0VPT5ZR8d6s9UGU/giphy.gif" 
+          src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDNqb2JoNjIzczhib3M3YTdweXRhd3R5djZobWJjYTVsNzV6cWx4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cPa0VPT5ZR8d6s9UGU/giphy.gif" 
           alt="Vinyl Record GIF" 
           class="w-full h-full object-cover rounded-full object-center scale-125 transition-all"
         />
@@ -111,50 +111,50 @@
           <!-- Set Pertama -->
           <a href="https://pahe.ink/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 hover:text-white transition-colors group">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUD7tpkhR3Dc1pb4tub3EGjai9OyebPPe4e4aEdXyjLyaCoONA9YXx5VY&s=10" alt="Pahe Logo" class="w-5 h-5 object-contain rounded" />
-            <span>(Pahe Ink) Tempat nyari unduhan film hemat kuota di sini &rarr;</span>
+            <span>(Pahe) Tempat download film bajakan &rarr;</span>
           </a>
           <span class="text-[#789]">•</span>
 
           <a href="https://letterboxd.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 hover:text-[#ff8000] transition-colors group">
             <img src="https://a.ltrbxd.com/logos/letterboxd-logo-alt-v-neg-rgb-1000px.png" alt="Letterboxd Logo" class="w-5 h-5 object-contain" />
-            <span>(Letterboxd) Tempatku numpahin ulasan & rating film &rarr;</span>
+            <span>(Letterboxd) Platform untuk rating dan review film &rarr;</span>
           </a>
           <span class="text-[#789]">•</span>
 
           <a href="https://subsource.net/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 hover:text-[#00c0ff] transition-colors group">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrSQo9Hyq5qT65afpCPg8VWlZOfU5BJ-RBplZC4wNbOR1UQW8p6yXKUyk&s=10" alt="Subsource Logo" class="w-5 h-5 object-contain rounded" />
-            <span>(Subsource) Biar gak pusing nyari subtitle, sikat di sini &rarr;</span>
+            <span>(Subsource) Buat download subtitle kalau belum disediakan dari sananya &rarr;</span>
           </a>
           <span class="text-[#789]">•</span>
 
           <a href="https://www.imdb.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 hover:text-[#f5c518] transition-colors group">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjMpi_8gO8BOwX786yzcX1g7ZN6hzZyNdyCXwNWiSk_A&s=10" alt="IMDb Logo" class="w-5 h-5 object-contain rounded" />
-            <span>(IMDb) Cek patokan rating global sebelum nonton di sini &rarr;</span>
+            <span>(IMDb) Alternatif referensi rating film (IMDb) &rarr;</span>
           </a>
           <span class="text-[#789]">•</span>
 
           <!-- Set Kedua (Duplikat untuk Looping Mulus) -->
           <a href="https://pahe.ink/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 hover:text-white transition-colors group">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUD7tpkhR3Dc1pb4tub3EGjai9OyebPPe4e4aEdXyjLyaCoONA9YXx5VY&s=10" alt="Pahe Logo" class="w-5 h-5 object-contain rounded" />
-            <span>(Pahe Ink) Tempat nyari unduhan film hemat kuota di sini &rarr;</span>
+            <span>(Pahe) Tempat download film bajakan &rarr;</span>
           </a>
           <span class="text-[#789]">•</span>
 
           <a href="https://letterboxd.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 hover:text-[#ff8000] transition-colors group">
             <img src="https://a.ltrbxd.com/logos/letterboxd-logo-alt-v-neg-rgb-1000px.png" alt="Letterboxd Logo" class="w-5 h-5 object-contain" />
-            <span>(Letterboxd) Tempatku numpahin ulasan & rating film &rarr;</span>
+            <span>(Letterboxd) Platform untuk rating dan review film &rarr;</span>
           </a>
           <span class="text-[#789]">•</span>
 
           <a href="https://subsource.net/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 hover:text-[#00c0ff] transition-colors group">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrSQo9Hyq5qT65afpCPg8VWlZOfU5BJ-RBplZC4wNbOR1UQW8p6yXKUyk&s=10" alt="Subsource Logo" class="w-5 h-5 object-contain rounded" />
-            <span>(Subsource) Biar gak pusing nyari subtitle, sikat di sini &rarr;</span>
+            <span>(Subsource) Buat download subtitle kalau belum disediakan dari sananya &rarr;</span>
           </a>
           <span class="text-[#789]">•</span>
 
           <a href="https://www.imdb.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 hover:text-[#f5c518] transition-colors group">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjMpi_8gO8BOwX786yzcX1g7ZN6hzZyNdyCXwNWiSk_A&s=10" alt="IMDb Logo" class="w-5 h-5 object-contain rounded" />
-            <span>(IMDb) Cek patokan rating global sebelum nonton di sini &rarr;</span>
+            <span>(IMDb) Alternatif referensi rating film (IMDb) &rarr;</span>
           </a>
           <span class="text-[#789]">•</span>
 
