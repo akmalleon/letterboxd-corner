@@ -1,7 +1,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- Tambahan CSS Khusus untuk Animasi Berjalan & Hover GIF -->
+<!-- Tambahan CSS Khusus untuk Animasi Berjalan, Hover GIF, dan Efek Nyala Api Berapi-api -->
 <style>
   @keyframes marquee {
     0% { transform: translateX(0%); }
@@ -26,6 +26,36 @@
   }
   a:hover .poster-img {
     opacity: 0;
+  }
+
+  /* Efek Nyala Api Berapi-api pada Tombol Letterboxd */
+  @keyframes flameGlow {
+    0%, 100% {
+      box-shadow: 0 0 15px rgba(255, 128, 0, 0.6), 0 0 30px rgba(255, 69, 0, 0.4), inset 0 0 10px rgba(255, 255, 0, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 25px rgba(255, 69, 0, 0.8), 0 0 45px rgba(255, 140, 0, 0.6), inset 0 0 15px rgba(255, 255, 0, 0.8);
+    }
+  }
+
+  @keyframes flameGrow {
+    0%, 100% {
+      transform: translateY(-2px) scale(1);
+      box-shadow: 0 0 30px rgba(255, 69, 0, 0.9), 0 0 60px rgba(255, 140, 0, 0.7), 0 0 90px rgba(255, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 0, 0.9);
+    }
+    50% {
+      transform: translateY(-4px) scale(1.04);
+      box-shadow: 0 0 40px rgba(255, 69, 0, 1), 0 0 75px rgba(255, 140, 0, 0.9), 0 0 110px rgba(255, 0, 0, 0.7), inset 0 0 25px rgba(255, 255, 0, 1);
+    }
+  }
+
+  .fire-btn {
+    animation: flameGlow 2.5s infinite ease-in-out;
+    border: 1px solid rgba(255, 165, 0, 0.6);
+  }
+
+  .fire-btn:hover {
+    animation: flameGrow 1s infinite ease-in-out;
   }
 </style>
 
@@ -155,18 +185,23 @@
           </div>
         </div>
         
+        <!-- Action Buttons Container (Tombol Letterboxd Utama diberi Efek Berapi-api) -->
         <div class="pt-2 flex flex-col sm:flex-row gap-3.5 items-stretch sm:items-center">
-          <a href="https://letterboxd.com/akmalleon/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-7 py-3.5 text-sm font-bold text-[#14181c] bg-[#ff8000] hover:bg-[#ff9933] rounded-xl transition-all duration-300 shadow-lg shadow-[#ff8000]/20 transform hover:-translate-y-0.5">
+          
+          <!-- Primary Letterboxd Profile Button with Flame Effect -->
+          <a href="https://letterboxd.com/akmalleon/" target="_blank" rel="noopener noreferrer" class="fire-btn inline-flex items-center justify-center px-7 py-3.5 text-sm font-bold text-[#14181c] bg-gradient-to-r from-[#ff5500] via-[#ff8000] to-[#ffaa00] rounded-xl transition-all duration-300 transform">
             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><circle cx="6" cy="12" r="5" fill="#ff8000"/><circle cx="12" cy="12" r="5" fill="#00e054"/><circle cx="18" cy="12" r="5" fill="#00c0ff"/></svg>
             Mampir ke Letterboxd-ku
           </a>
 
+          <!-- Reviews Button -->
           <a href="https://letterboxd.com/akmalleon/reviews/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-6 py-3.5 text-sm font-bold text-white bg-[#2c3440]/90 hover:bg-[#344150] border border-[#445566]/50 backdrop-blur-sm rounded-xl transition-all duration-300 shadow-md hover:border-[#00c0ff]/60 group">
             <span>Ngobrolin & Ulas Film Bareng</span>
             <svg class="w-4 h-4 ml-2 text-[#00c0ff] transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
             </svg>
           </a>
+
         </div>
       </div>
       
@@ -238,7 +273,7 @@
           </div>
         </a>
 
-        <!-- 3. Parasite (Updated GIF) -->
+        <!-- 3. Parasite -->
         <a href="https://letterboxd.com/film/parasite-2019/" target="_blank" rel="noopener noreferrer" class="group relative bg-[#1b222c] rounded-xl overflow-hidden border border-[#2c3440] shadow-xl hover:border-[#00c0ff] transition-all duration-300 transform hover:-translate-y-1.5">
           <div class="aspect-[2/3] w-full overflow-hidden bg-neutral-900 relative">
             <img src="https://m.media-amazon.com/images/M/MV5BYjk1Y2U4MjQtY2ZiNS00OWQyLWI3MmYtZWUwNmRjYWRiNWNhXkEyXkFqcGc@._V1_.jpg" alt="Parasite Poster" class="poster-img w-full h-full object-cover transition-opacity duration-300 absolute inset-0 z-10" />
