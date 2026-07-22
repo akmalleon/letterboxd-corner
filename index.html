@@ -316,11 +316,11 @@
     </div>
 
     <!-- Audio Element -->
-    <audio id="bgMusic" loop preload="auto" autoplay playsinline muted>
+    <audio id="bgMusic" loop preload="auto">
       <source src="Exit Music (For A Film) - Radiohead.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- JavaScript (Dioptimalkan untuk Global Trigger, Efisiensi & Hapus Bubble Permanen) -->
+    <!-- JavaScript (Diperbarui agar stabil dan menghapus bubble text ke akar DOM) -->
     <script>
       (function initMusicPlayer() {
         var music = document.getElementById("bgMusic");
@@ -332,10 +332,7 @@
         
         var NORMAL_VOLUME = 0.85;
         var audioUnlocked = false;
-        var isAttempting = false;
-        var hintRemoved = false; // Flag agar bubble tidak muncul kembali
 
-        // Daftar event yang akan memicu lagu menyala (diterapkan ke seluruh window)
         var unlockEvents = ["mousemove", "pointerdown", "touchstart", "scroll", "keydown", "click"];
 
         var iconVolumeOn = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.06c1.48-.74 2.5-2.26 2.5-4.03zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>';
@@ -348,12 +345,14 @@
           vinylBtn.setAttribute("aria-label", muted ? "Nyalakan suara" : "Mute musik");
           vinylBtn.setAttribute("aria-pressed", muted ? "true" : "false");
           
-          // Sembunyikan bubble text secara PERMANEN saat musik sudah menyala
-          if (playHint && !muted && !hintRemoved) {
-            playHint.style.opacity = "0";
-            setTimeout(function() { 
-              playHint.style.display = "none"; 
-              hintRemoved = true; // Tandai agar tidak dimunculkan kembali meski di-mute ulang
+          // Penghapusan Elemen Bubble Text Secara Permanen
+          if (!muted && playHint) {
+            playHint.style.opacity = "0"; // Fade out effect
+            setTimeout(function() {
+              if (playHint && playHint.parentNode) {
+                playHint.parentNode.removeChild(playHint); // Hapus elemen dari struktur web
+              }
+              playHint = null; // Kosongkan variabel agar tidak dieksekusi lagi
             }, 500);
           }
         }
@@ -363,33 +362,27 @@
           else vinylImg.classList.remove("animate-spin");
         }
 
-        function attemptUnlock() {
-          if (audioUnlocked || isAttempting) return;
-          isAttempting = true;
-
-          // Coba nyalakan suara
+        function handleInteraction() {
+          if (audioUnlocked) return;
+          
+          // Coba nyalakan suara dengan stabil
           music.muted = false;
           music.volume = NORMAL_VOLUME;
           
           var playPromise = music.play();
           if (playPromise !== undefined) {
             playPromise.then(function() {
-              // Jika browser mengizinkan (sukses)
               audioUnlocked = true;
               setMuteUI(false);
               setSpinning(true);
               
-              // Hapus semua event listener karena sudah tidak diperlukan
+              // Hapus semua event listener karena sudah sukses
               unlockEvents.forEach(function(eventName) {
-                window.removeEventListener(eventName, attemptUnlock, true);
+                window.removeEventListener(eventName, handleInteraction, true);
               });
-            }).catch(function(error) {
-              // Jika browser masih memblokir, kembalikan ke mute agar tidak error dan tetap mutar vinyl-nya
+            }).catch(function() {
+              // Jika ditolak browser, biarkan saja kembali ke mode mute tanpa memaksa ulang
               music.muted = true;
-              music.play().catch(function(){}); 
-              
-              // Beri jeda agar tidak spam console sebelum percobaan interaksi berikutnya
-              setTimeout(function() { isAttempting = false; }, 800);
             });
           }
         }
@@ -404,14 +397,14 @@
           }
         };
 
-        // Pasang sensor global ke seluruh layar untuk menangkap interaksi pertama pengguna
+        // Pasang event listener ke seluruh window
         unlockEvents.forEach(function(eventName) {
-          window.addEventListener(eventName, attemptUnlock, { capture: true, passive: true });
+          window.addEventListener(eventName, handleInteraction, true);
         });
 
         music.addEventListener("playing", function() { setSpinning(true); });
 
-        // Paksa mulai berputar dalam keadaan mute di awal
+        // Paksa mulai mute saat halaman pertama kali dimuat
         music.muted = true;
         music.play().then(function() {
           setMuteUI(true);
@@ -430,7 +423,6 @@
       <span class="text-xs font-medium text-white tracking-wide">
         Play the music for <span class="text-[#ff8000] font-semibold">better experience</span>
       </span>
-      <!-- Ikon Tangan Penunjuk Ikonik / Nuansa Film (Clapperboard Emoji + Animasi Jari Menunjuk) -->
       <span class="animate-point text-base select-none" role="img" aria-label="unjuk arah">👉🎬</span>
     </div>
 
