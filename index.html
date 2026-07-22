@@ -66,6 +66,15 @@
     animation: flameGrow 1s infinite ease-in-out;
   }
 
+  /* Animasi menunjuk untuk tangan ikonik */
+  @keyframes pointBounce {
+    0%, 100% { transform: translateX(0) scale(1); }
+    50% { transform: translateX(-6px) scale(1.1); }
+  }
+  .animate-point {
+    animation: pointBounce 1.2s infinite ease-in-out;
+  }
+
   /* Vinyl player mengikuti scroll (tetap di pojok kanan viewport) */
   .vinyl-floating {
     position: fixed;
@@ -307,11 +316,11 @@
     </div>
 
     <!-- Audio Element -->
-    <audio id="bgMusic" loop preload="auto">
+    <audio id="bgMusic" loop preload="auto" autoplay playsinline muted>
       <source src="Exit Music (For A Film) - Radiohead.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- JavaScript Diperbarui untuk Trigger Gerakan Kursor Bebas -->
+    <!-- JavaScript -->
     <script>
       (function initMusicPlayer() {
         var music = document.getElementById("bgMusic");
@@ -321,11 +330,9 @@
         var vinylBtn = document.getElementById("vinylBtn");
         var NORMAL_VOLUME = 0.85;
         var audioUnlocked = false;
-
-        // Daftar event interaksi menyeluruh termasuk pointermove (pergerakan kursor bebas)
         var unlockEvents = [
-          "pointermove", "mousemove", "pointerdown", "touchstart", 
-          "click", "scroll", "wheel", "keydown"
+          "pointerdown", "touchstart", "touchend", "click",
+          "scroll", "wheel", "keydown", "mousemove"
         ];
 
         var iconVolumeOn = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.06c1.48-.74 2.5-2.26 2.5-4.03zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>';
@@ -347,29 +354,52 @@
           }
         }
 
-        function unlockAudio() {
-          if (audioUnlocked) return;
-
+        function startWithSound() {
           music.muted = false;
           music.volume = NORMAL_VOLUME;
-          
-          music.play().then(function() {
+          return music.play().then(function() {
             audioUnlocked = true;
             setMuteUI(false);
             setSpinning(true);
             removeUnlockListeners();
-          }).catch(function() {
-            // Jika browser masih menolak, biarkan sistem menangkap interaksi berikutnya
+          });
+        }
+
+        function startMuted() {
+          music.muted = true;
+          return music.play().then(function() {
+            setMuteUI(true);
+            setSpinning(true);
+          });
+        }
+
+        function unlockAudio() {
+          if (audioUnlocked) return;
+
+          startWithSound().catch(function() {
+            if (music.paused) {
+              startMuted();
+            }
           });
         }
 
         function removeUnlockListeners() {
           unlockEvents.forEach(function(eventName) {
+            document.removeEventListener(eventName, unlockAudio, true);
             window.removeEventListener(eventName, unlockAudio, true);
           });
         }
 
         window.toggleMute = function() {
+          if (!audioUnlocked) {
+            startWithSound().catch(function() {
+              music.muted = !music.muted;
+              setMuteUI(music.muted);
+              setSpinning(true);
+            });
+            return;
+          }
+
           music.muted = !music.muted;
           if (!music.muted) {
             music.volume = NORMAL_VOLUME;
@@ -383,8 +413,8 @@
           }
         };
 
-        // Pasang pendengar ke seluruh window agar gerakan kursor sekecil apapun langsung mentrigger audio
         unlockEvents.forEach(function(eventName) {
+          document.addEventListener(eventName, unlockAudio, { capture: true, passive: true });
           window.addEventListener(eventName, unlockAudio, { capture: true, passive: true });
         });
 
@@ -393,33 +423,42 @@
         });
 
         music.volume = NORMAL_VOLUME;
+
+        startWithSound().catch(function() {
+          startMuted().catch(function() {
+            setSpinning(false);
+          });
+        });
       })();
     </script>
 
   </section>
 
-  <!-- Vinyl player — fixed, mengikuti scroll -->
-  <div class="vinyl-floating flex items-center gap-3 group">
-    <div class="bg-[#14181c]/95 backdrop-blur-md border border-[#2c3440] px-4 py-2.5 rounded-xl shadow-2xl opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none flex flex-col items-end">
-      <span class="text-[10px] font-semibold text-[#00e054] tracking-wider uppercase flex items-center gap-1.5">
-        <span class="w-1.5 h-1.5 rounded-full bg-[#00e054] animate-pulse"></span>
-        Now Playing
+  <!-- Vinyl player — fixed dengan bubble text bernuansa perfilman & tangan penunjuk -->
+  <div class="vinyl-floating flex items-center gap-2 group">
+    <!-- Bubble Text / Kotak Pesan Perfilman -->
+    <div class="bg-[#1b222c]/95 backdrop-blur-md border border-[#ff8000]/40 px-3.5 py-2 rounded-xl shadow-2xl flex items-center gap-2">
+      <span class="text-xs font-medium text-white tracking-wide">
+        Play the music for <span class="text-[#ff8000] font-semibold">better experience</span>
       </span>
-      <span class="text-xs sm:text-sm font-bold text-white tracking-tight">Exit Music (For a Film)</span>
-      <span class="text-[10px] text-[#9ab]">Radiohead</span>
+      <!-- Ikon Tangan Penunjuk Ikonik / Nuansa Film (Clapperboard Emoji + Animasi Jari Menunjuk) -->
+      <span class="animate-point text-base select-none" role="img" aria-label="unjuk arah">👉🎬</span>
     </div>
 
-    <button onclick="toggleMute()" id="vinylBtn" type="button" aria-label="Mute musik" aria-pressed="false" class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#1b222c] p-1 border-2 border-[#00e054] shadow-2xl backdrop-blur-md transform hover:scale-110 transition-transform duration-300 cursor-pointer overflow-hidden flex items-center justify-center focus:outline-none group/vinyl">
-      <div id="muteOverlay" class="absolute inset-0 transition-all duration-300 z-10 flex items-center justify-center opacity-0 group-hover/vinyl:opacity-100" style="background-color: rgba(0,0,0,0);">
-        <svg id="muteIcon" class="w-5 h-5 sm:w-6 sm:h-6 text-white drop-shadow-md" fill="currentColor" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.06c1.48-.74 2.5-2.26 2.5-4.03zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-      </div>
-      <img
-        id="vinylImg"
-        src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDNqb2JoNjIzczhib3M3YTdweXRhd3R5djZobWJjYTVsNzV6cWx4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cPa0VPT5ZR8d6s9UGU/giphy.gif"
-        alt="Vinyl Record GIF"
-        class="w-full h-full object-cover rounded-full object-center scale-125 transition-all"
-      />
-    </button>
+    <!-- Vinyl Button -->
+    <div class="relative flex items-center">
+      <button onclick="toggleMute()" id="vinylBtn" type="button" aria-label="Mute musik" aria-pressed="false" class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#1b222c] p-1 border-2 border-[#00e054] shadow-2xl backdrop-blur-md transform hover:scale-110 transition-transform duration-300 cursor-pointer overflow-hidden flex items-center justify-center focus:outline-none group/vinyl">
+        <div id="muteOverlay" class="absolute inset-0 transition-all duration-300 z-10 flex items-center justify-center opacity-0 group-hover/vinyl:opacity-100" style="background-color: rgba(0,0,0,0);">
+          <svg id="muteIcon" class="w-5 h-5 sm:w-6 sm:h-6 text-white drop-shadow-md" fill="currentColor" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.06c1.48-.74 2.5-2.26 2.5-4.03zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        </div>
+        <img
+          id="vinylImg"
+          src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDNqb2JoNjIzczhib3M3YTdweXRhd3R5djZobWJjYTVsNzV6cWx4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cPa0VPT5ZR8d6s9UGU/giphy.gif"
+          alt="Vinyl Record GIF"
+          class="w-full h-full object-cover rounded-full object-center scale-125 transition-all"
+        />
+      </button>
+    </div>
   </div>
 </div>
 
