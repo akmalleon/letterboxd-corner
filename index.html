@@ -1,13 +1,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- Tambahan CSS untuk Menutup Total Area Putih & Animasi -->
+<!-- Tambahan CSS untuk Mengunci Latar Belakang & Animasi -->
 <style>
-  /* Memaksa latar belakang global platform menjadi gelap gulita */
-  body, html {
-    background-color: #14181c !important;
-  }
-
   @keyframes marquee {
     0% { transform: translateX(0%); }
     100% { transform: translateX(-50%); }
@@ -64,10 +59,8 @@
   }
 </style>
 
-<!-- Lapisan penutup latar belakang mutlak untuk melibas garis putih bawaan Lynk -->
-<div style="position: fixed; inset: 0; background-color: #14181c; z-index: -999; pointer-events: none;"></div>
-
-<div style="background-color: #14181c; width: 100%; position: relative; margin-top: -40px;">
+<!-- Wrapper dengan posisi fixed/absolute yang menutupi seluruh kotak putih kontainer -->
+<div style="background-color: #14181c; position: absolute; top: 0; left: 0; width: 100%; min-height: 100vh; z-index: 99; margin: 0; padding: 0;">
   <section class="relative text-[#9ab] overflow-hidden py-12 md:py-20 px-4 sm:px-6 lg:px-8 font-sans">
     
     <!-- Background GIF with Absolute Fixed True Autoplay -->
