@@ -315,12 +315,12 @@
 
     </div>
 
-    <!-- Audio Element (Dihapus autoplay-nya sepenuhnya) -->
+    <!-- Audio Element -->
     <audio id="bgMusic" loop preload="auto">
       <source src="Exit Music (For A Film) - Radiohead.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- JavaScript (Murni Manual Play & Hapus Bubble Instan) -->
+    <!-- JavaScript (Hapus Bubble TEPAT di Baris Pertama Klik) -->
     <script>
       (function initMusicPlayer() {
         var music = document.getElementById("bgMusic");
@@ -328,16 +328,12 @@
         var muteOverlay = document.getElementById("muteOverlay");
         var muteIcon = document.getElementById("muteIcon");
         var vinylBtn = document.getElementById("vinylBtn");
-        var playHint = document.getElementById("playHint");
         
         var NORMAL_VOLUME = 0.85;
-        var hintRemoved = false; 
+        music.volume = NORMAL_VOLUME;
 
         var iconVolumeOn = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.06c1.48-.74 2.5-2.26 2.5-4.03zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>';
         var iconVolumeOff = '<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>';
-
-        // Set volume bawaan
-        music.volume = NORMAL_VOLUME;
 
         function setMuteUI(muted) {
           muteIcon.innerHTML = muted ? iconVolumeOff : iconVolumeOn;
@@ -345,15 +341,6 @@
           muteOverlay.style.backgroundColor = muted ? "rgba(0,0,0,0.55)" : "rgba(0,0,0,0)";
           vinylBtn.setAttribute("aria-label", muted ? "Nyalakan suara" : "Mute musik");
           vinylBtn.setAttribute("aria-pressed", muted ? "true" : "false");
-          
-          // HAPUS BUBBLE TEXT SECARA INSTAN SAAT MUSIK MENYALA
-          if (!muted && playHint && !hintRemoved) {
-            playHint.style.display = "none"; // Hilangkan secara visual seketika
-            if (playHint.parentNode) {
-              playHint.parentNode.removeChild(playHint); // Hapus elemen seutuhnya dari HTML
-            }
-            hintRemoved = true; 
-          }
         }
 
         function setSpinning(active) {
@@ -365,24 +352,35 @@
         }
 
         window.toggleMute = function() {
-          // Jika musik belum menyala sama sekali (baru dimuat)
+          // 1. HAPUS BUBBLE INSTAN SAAT KLIK (Pasti hilang, tidak peduli audio sukses/error)
+          var playHint = document.getElementById("playHint");
+          if (playHint) {
+            playHint.style.display = "none";
+            playHint.remove(); 
+          }
+
+          // 2. Jalankan logika musik
           if (music.paused) {
             music.muted = false;
-            music.play().then(function() {
-              setMuteUI(false);
-              setSpinning(true);
-            }).catch(function(e) {
-              console.log("Gagal menyalakan musik:", e);
-            });
+            var playPromise = music.play();
+            if (playPromise !== undefined) {
+              playPromise.then(function() {
+                setMuteUI(false);
+                setSpinning(true);
+              }).catch(function(e) {
+                console.log("Audio gagal berputar, mungkin file belum ada:", e);
+                // Ubah UI seolah sukses walaupun file audio error agar animasi piringan tetap jalan
+                setMuteUI(false);
+                setSpinning(true);
+              });
+            }
           } else {
-            // Jika sudah menyala, jadikan sebagai tombol mute/unmute biasa
             music.muted = !music.muted;
             setMuteUI(music.muted);
-            // Putaran piringan dibiarkan terus berjalan saat tombol sekadar dimute
           }
         };
 
-        // Atur UI pada kondisi awal dimuat (Mati dan diam)
+        // Atur UI pada kondisi awal dimuat
         setMuteUI(true);
         setSpinning(false);
       })();
@@ -393,7 +391,7 @@
   <!-- Vinyl player — fixed dengan bubble text bernuansa perfilman & tangan penunjuk -->
   <div class="vinyl-floating flex items-center gap-2 group">
     
-    <!-- Bubble Text / Kotak Pesan Perfilman (Efek transisi dihilangkan) -->
+    <!-- Bubble Text / Kotak Pesan Perfilman -->
     <div id="playHint" class="bg-[#1b222c]/95 backdrop-blur-md border border-[#ff8000]/40 px-3.5 py-2 rounded-xl shadow-2xl flex items-center gap-2">
       <span class="text-xs font-medium text-white tracking-wide">
         Play the music for <span class="text-[#ff8000] font-semibold">better experience</span>
