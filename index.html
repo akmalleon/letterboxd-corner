@@ -1,8 +1,16 @@
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://cdn.tailwindcss.com"></script>
-
-<!-- Tambahan CSS untuk Mengunci Latar Belakang & Animasi -->
-<style>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leon — Letterboxd Corner</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #14181c;
+  }
   @keyframes marquee {
     0% { transform: translateX(0%); }
     100% { transform: translateX(-50%); }
@@ -57,10 +65,26 @@
   .fire-btn:hover {
     animation: flameGrow 1s infinite ease-in-out;
   }
-</style>
 
-<!-- Wrapper dengan posisi fixed/absolute yang menutupi seluruh kotak putih kontainer -->
-<div style="background-color: #14181c; position: absolute; top: 0; left: 0; width: 100%; min-height: 100vh; z-index: 99; margin: 0; padding: 0;">
+  /* Vinyl player mengikuti scroll (tetap di pojok kanan viewport) */
+  .vinyl-floating {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 9999;
+    pointer-events: auto;
+  }
+  @media (min-width: 640px) {
+    .vinyl-floating {
+      top: 1.5rem;
+      right: 1.5rem;
+    }
+  }
+  </style>
+</head>
+<body>
+
+<div style="background-color: #14181c; width: 100%; min-height: 100vh; margin: 0; padding: 0;">
   <section class="relative text-[#9ab] overflow-hidden py-12 md:py-20 px-4 sm:px-6 lg:px-8 font-sans">
     
     <!-- Background GIF with Absolute Fixed True Autoplay -->
@@ -77,30 +101,6 @@
     <div class="absolute top-0 left-1/4 w-[28rem] h-[28rem] bg-[#ff8000]/10 rounded-full blur-[140px] pointer-events-none z-0"></div>
     <div class="absolute top-1/3 right-1/4 w-[28rem] h-[28rem] bg-[#00e054]/10 rounded-full blur-[140px] pointer-events-none z-0"></div>
     <div class="absolute bottom-0 right-1/3 w-[28rem] h-[28rem] bg-[#00c0ff]/10 rounded-full blur-[140px] pointer-events-none z-0"></div>
-
-    <!-- Absolute Corner Container -->
-    <div class="absolute top-4 right-4 sm:top-6 sm:right-6 z-30 flex items-center gap-3 group pointer-events-auto">
-      <div class="bg-[#14181c]/95 backdrop-blur-md border border-[#2c3440] px-4 py-2.5 rounded-xl shadow-2xl opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none flex flex-col items-end">
-        <span class="text-[10px] font-semibold text-[#00e054] tracking-wider uppercase flex items-center gap-1.5">
-          <span class="w-1.5 h-1.5 rounded-full bg-[#00e054] animate-pulse"></span>
-          Now Playing
-        </span>
-        <span class="text-xs sm:text-sm font-bold text-white tracking-tight">Exit Music (For a Film)</span>
-        <span class="text-[10px] text-[#9ab]">Radiohead</span>
-      </div>
-
-      <button onclick="toggleAudio()" id="vinylBtn" class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#1b222c] p-1 border-2 border-[#00e054] shadow-2xl backdrop-blur-md transform hover:scale-110 transition-transform duration-300 cursor-pointer overflow-hidden flex items-center justify-center focus:outline-none">
-        <div id="playOverlay" class="absolute inset-0 bg-black/40 hover:bg-transparent transition-colors z-10 flex items-center justify-center">
-          <svg id="playIcon" class="w-6 h-6 text-white drop-shadow-md" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        </div>
-        <img 
-          id="vinylImg"
-          src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDNqb2JoNjIzczhib3M3YTdweXRhd3R5djZobWJjYTVsNzV6cWx4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cPa0VPT5ZR8d6s9UGU/giphy.gif" 
-          alt="Vinyl Record GIF" 
-          class="w-full h-full object-cover rounded-full object-center scale-125 transition-all"
-        />
-      </button>
-    </div>
 
     <div class="max-w-6xl mx-auto space-y-12 relative z-10">
       
@@ -307,32 +307,115 @@
     </div>
 
     <!-- Audio Element -->
-    <audio id="bgMusic" loop preload="auto">
-      <source src="https://raw.githubusercontent.com/akmalleon/letterboxd-corner/main/Exit%20Music%20(For%20A%20Film)%20-%20Radiohead.mp3" type="audio/mpeg">
+    <audio id="bgMusic" loop preload="auto" autoplay playsinline>
+      <source src="Exit Music (For A Film) - Radiohead.mp3" type="audio/mpeg">
     </audio>
 
     <!-- JavaScript -->
     <script>
-      function toggleAudio() {
-        var music = document.getElementById("bgMusic");
+      function setPlayingUI(isPlaying) {
         var icon = document.getElementById("playIcon");
         var overlay = document.getElementById("playOverlay");
         var vinylImg = document.getElementById("vinylImg");
-        
-        if (music.paused) {
-          music.play();
+
+        if (isPlaying) {
           overlay.style.backgroundColor = "transparent";
           icon.style.display = "none";
           vinylImg.classList.add("animate-spin");
         } else {
-          music.pause();
           overlay.style.backgroundColor = "rgba(0,0,0,0.4)";
           icon.style.display = "block";
           icon.innerHTML = '<path d="M8 5v14l11-7z"/>';
           vinylImg.classList.remove("animate-spin");
         }
       }
+
+      function startAudio() {
+        var music = document.getElementById("bgMusic");
+        if (!music || !music.paused) return;
+
+        var playPromise = music.play();
+        if (playPromise !== undefined) {
+          playPromise.then(function() {
+            setPlayingUI(true);
+          }).catch(function() {
+            setPlayingUI(false);
+          });
+        }
+      }
+
+      function toggleAudio() {
+        var music = document.getElementById("bgMusic");
+
+        if (music.paused) {
+          music.play().then(function() {
+            setPlayingUI(true);
+          }).catch(function() {
+            setPlayingUI(false);
+          });
+        } else {
+          music.pause();
+          setPlayingUI(false);
+        }
+      }
+
+      // Autoplay saat halaman dimuat + fallback jika browser blokir autoplay berbunyi
+      (function initAutoplay() {
+        var music = document.getElementById("bgMusic");
+        if (!music) return;
+
+        music.volume = 0.85;
+
+        function tryAutoplayOnce() {
+          if (!music.paused) return;
+          startAudio();
+        }
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", tryAutoplayOnce);
+        } else {
+          tryAutoplayOnce();
+        }
+
+        ["click", "touchstart", "scroll", "keydown"].forEach(function(eventName) {
+          document.addEventListener(eventName, function unlockAudio() {
+            tryAutoplayOnce();
+            document.removeEventListener(eventName, unlockAudio);
+          }, { once: true, passive: true });
+        });
+
+        music.addEventListener("playing", function() {
+          setPlayingUI(true);
+        });
+      })();
     </script>
 
   </section>
+
+  <!-- Vinyl player — fixed, mengikuti scroll -->
+  <div class="vinyl-floating flex items-center gap-3 group">
+    <div class="bg-[#14181c]/95 backdrop-blur-md border border-[#2c3440] px-4 py-2.5 rounded-xl shadow-2xl opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none flex flex-col items-end">
+      <span class="text-[10px] font-semibold text-[#00e054] tracking-wider uppercase flex items-center gap-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#00e054] animate-pulse"></span>
+        Now Playing
+      </span>
+      <span class="text-xs sm:text-sm font-bold text-white tracking-tight">Exit Music (For a Film)</span>
+      <span class="text-[10px] text-[#9ab]">Radiohead</span>
+    </div>
+
+    <button onclick="toggleAudio()" id="vinylBtn" type="button" aria-label="Toggle musik" class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#1b222c] p-1 border-2 border-[#00e054] shadow-2xl backdrop-blur-md transform hover:scale-110 transition-transform duration-300 cursor-pointer overflow-hidden flex items-center justify-center focus:outline-none">
+      <div id="playOverlay" class="absolute inset-0 bg-black/40 hover:bg-transparent transition-colors z-10 flex items-center justify-center">
+        <svg id="playIcon" class="w-6 h-6 text-white drop-shadow-md" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <img
+        id="vinylImg"
+        src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDNqb2JoNjIzczhib3M3YTdweXRhd3R5djZobWJjYTVsNzV6cWx4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cPa0VPT5ZR8d6s9UGU/giphy.gif"
+        alt="Vinyl Record GIF"
+        class="w-full h-full object-cover rounded-full object-center scale-125 transition-all"
+      />
+    </button>
+  </div>
 </div>
+
+</body>
+</html>
