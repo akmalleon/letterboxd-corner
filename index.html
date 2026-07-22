@@ -320,7 +320,7 @@
       <source src="Exit Music (For A Film) - Radiohead.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- JavaScript (Dioptimalkan untuk Global Trigger & Efisiensi) -->
+    <!-- JavaScript (Dioptimalkan untuk Global Trigger, Efisiensi & Hapus Bubble Permanen) -->
     <script>
       (function initMusicPlayer() {
         var music = document.getElementById("bgMusic");
@@ -333,6 +333,7 @@
         var NORMAL_VOLUME = 0.85;
         var audioUnlocked = false;
         var isAttempting = false;
+        var hintRemoved = false; // Flag agar bubble tidak muncul kembali
 
         // Daftar event yang akan memicu lagu menyala (diterapkan ke seluruh window)
         var unlockEvents = ["mousemove", "pointerdown", "touchstart", "scroll", "keydown", "click"];
@@ -347,15 +348,13 @@
           vinylBtn.setAttribute("aria-label", muted ? "Nyalakan suara" : "Mute musik");
           vinylBtn.setAttribute("aria-pressed", muted ? "true" : "false");
           
-          // Sembunyikan bubble text dengan efek fade out saat musik sudah menyala
-          if (playHint) {
-            if (!muted) {
-              playHint.style.opacity = "0";
-              setTimeout(function() { playHint.style.display = "none"; }, 500);
-            } else {
-              playHint.style.display = "flex";
-              setTimeout(function() { playHint.style.opacity = "1"; }, 10);
-            }
+          // Sembunyikan bubble text secara PERMANEN saat musik sudah menyala
+          if (playHint && !muted && !hintRemoved) {
+            playHint.style.opacity = "0";
+            setTimeout(function() { 
+              playHint.style.display = "none"; 
+              hintRemoved = true; // Tandai agar tidak dimunculkan kembali meski di-mute ulang
+            }, 500);
           }
         }
 
@@ -385,8 +384,7 @@
                 window.removeEventListener(eventName, attemptUnlock, true);
               });
             }).catch(function(error) {
-              // Jika browser masih memblokir (biasanya karena event mousemove belum dihitung interaksi valid)
-              // Kita kembalikan ke mute agar tidak error dan tetap mutar vinyl-nya
+              // Jika browser masih memblokir, kembalikan ke mute agar tidak error dan tetap mutar vinyl-nya
               music.muted = true;
               music.play().catch(function(){}); 
               
@@ -396,7 +394,7 @@
           }
         }
 
-        // Toggle Manual via Tombol (hanya sebagai cadangan jika user ingin matikan lagi)
+        // Toggle Manual via Tombol
         window.toggleMute = function() {
           music.muted = !music.muted;
           if (!music.muted) music.volume = NORMAL_VOLUME;
