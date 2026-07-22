@@ -127,7 +127,34 @@
   .fh-4 { animation: floatHeart4 1.3s infinite ease-out 0.5s; }
   .fh-5 { animation: floatHeart5 1.5s infinite ease-out 0.4s; }
 
-  /* Vinyl player mengikuti scroll (tetap di pojok kanan viewport) */
+  /* KODE UTAMA PEMICU AGAR BACKGROUND GIF TERUS BERGERAK TANPA DI-SCROLL */
+  .bg-gif-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    background-color: #14181c;
+    transform: translate3d(0, 0, 0); /* Memaksa GPU render layer */
+    will-change: transform;
+  }
+  .bg-gif-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.05) translate3d(0, 0, 0);
+    filter: blur(4px);
+    opacity: 0.2;
+    animation: preventFreeze 1s infinite linear; /* Trik halus pencegah browser pause */
+  }
+  @keyframes preventFreeze {
+    0%, 100% { opacity: 0.2; }
+  }
+
+  /* Vinyl player mengikuti scroll */
   .vinyl-floating {
     position: fixed;
     top: 1rem;
@@ -148,16 +175,14 @@
 <div style="background-color: #14181c; width: 100%; min-height: 100vh; margin: 0; padding: 0;">
   <section class="relative text-[#9ab] overflow-hidden py-12 md:py-20 px-4 sm:px-6 lg:px-8 font-sans">
     
-    <!-- Background GIF (Dipaksa load langsung lewat eager) -->
-    <div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; overflow: hidden; background-color: #14181c;">
+    <!-- Background GIF yang Diperbaiki -->
+    <div class="bg-gif-container">
       <img 
         src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeW1tYzR3dW5icDE1MzhpZmw0MXk0eGNmYmdheDFna3ZlaHBtMHBqZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/8Q31McooUHTNu/giphy.gif" 
         alt="Background GIF" 
         loading="eager"
-        decoding="sync"
-        style="width: 100%; height: 100%; object-fit: cover; transform: scale(1.05); filter: blur(4px); opacity: 0.2;"
       />
-      <div style="position: absolute; inset: 0; background: linear-gradient(to top, #14181c, rgba(20,24,28,0.9), rgba(20,24,28,0.7)); backdrop-filter: blur(1px);"></div>
+      <div style="position: absolute; inset: 0; background: linear-gradient(to top, #14181c, rgba(20,24,28,0.9), rgba(20,24,28,0.7));"></div>
     </div>
 
     <!-- Ambient background glow matching Letterboxd signature colors -->
