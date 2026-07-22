@@ -307,11 +307,11 @@
     </div>
 
     <!-- Audio Element -->
-    <audio id="bgMusic" loop preload="auto" autoplay playsinline muted>
+    <audio id="bgMusic" loop preload="auto">
       <source src="Exit Music (For A Film) - Radiohead.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- JavaScript -->
+    <!-- JavaScript Diperbarui untuk Trigger Gerakan Kursor Bebas -->
     <script>
       (function initMusicPlayer() {
         var music = document.getElementById("bgMusic");
@@ -321,9 +321,11 @@
         var vinylBtn = document.getElementById("vinylBtn");
         var NORMAL_VOLUME = 0.85;
         var audioUnlocked = false;
+
+        // Daftar event interaksi menyeluruh termasuk pointermove (pergerakan kursor bebas)
         var unlockEvents = [
-          "pointerdown", "touchstart", "touchend", "click",
-          "scroll", "wheel", "keydown", "mousemove"
+          "pointermove", "mousemove", "pointerdown", "touchstart", 
+          "click", "scroll", "wheel", "keydown"
         ];
 
         var iconVolumeOn = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.06c1.48-.74 2.5-2.26 2.5-4.03zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>';
@@ -345,52 +347,29 @@
           }
         }
 
-        function startWithSound() {
+        function unlockAudio() {
+          if (audioUnlocked) return;
+
           music.muted = false;
           music.volume = NORMAL_VOLUME;
-          return music.play().then(function() {
+          
+          music.play().then(function() {
             audioUnlocked = true;
             setMuteUI(false);
             setSpinning(true);
             removeUnlockListeners();
-          });
-        }
-
-        function startMuted() {
-          music.muted = true;
-          return music.play().then(function() {
-            setMuteUI(true);
-            setSpinning(true);
-          });
-        }
-
-        function unlockAudio() {
-          if (audioUnlocked) return;
-
-          startWithSound().catch(function() {
-            if (music.paused) {
-              startMuted();
-            }
+          }).catch(function() {
+            // Jika browser masih menolak, biarkan sistem menangkap interaksi berikutnya
           });
         }
 
         function removeUnlockListeners() {
           unlockEvents.forEach(function(eventName) {
-            document.removeEventListener(eventName, unlockAudio, true);
             window.removeEventListener(eventName, unlockAudio, true);
           });
         }
 
         window.toggleMute = function() {
-          if (!audioUnlocked) {
-            startWithSound().catch(function() {
-              music.muted = !music.muted;
-              setMuteUI(music.muted);
-              setSpinning(true);
-            });
-            return;
-          }
-
           music.muted = !music.muted;
           if (!music.muted) {
             music.volume = NORMAL_VOLUME;
@@ -404,8 +383,8 @@
           }
         };
 
+        // Pasang pendengar ke seluruh window agar gerakan kursor sekecil apapun langsung mentrigger audio
         unlockEvents.forEach(function(eventName) {
-          document.addEventListener(eventName, unlockAudio, { capture: true, passive: true });
           window.addEventListener(eventName, unlockAudio, { capture: true, passive: true });
         });
 
@@ -414,12 +393,6 @@
         });
 
         music.volume = NORMAL_VOLUME;
-
-        startWithSound().catch(function() {
-          startMuted().catch(function() {
-            setSpinning(false);
-          });
-        });
       })();
     </script>
 
