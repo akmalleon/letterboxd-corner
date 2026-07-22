@@ -18,35 +18,33 @@
   <div class="absolute top-1/3 right-1/4 w-[28rem] h-[28rem] bg-[#00e054]/10 rounded-full blur-[140px] pointer-events-none z-0"></div>
   <div class="absolute bottom-0 right-1/3 w-[28rem] h-[28rem] bg-[#00c0ff]/10 rounded-full blur-[140px] pointer-events-none z-0"></div>
 
-  <div class="max-w-6xl mx-auto space-y-12 relative z-10">
-    
-    <!-- Top Bar Container for Music Widget (Ensures it stays on top-right of content and scrolls naturally) -->
-    <div class="flex justify-end w-full mb-[-2rem]">
-      <div class="relative flex items-center gap-3 group pointer-events-auto">
-        <!-- Full Song Title & Artist Popup (Appears on Hover) -->
-        <div class="bg-[#14181c]/95 backdrop-blur-md border border-[#2c3440] px-4 py-2.5 rounded-xl shadow-2xl opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none flex flex-col items-end">
-          <span class="text-[10px] font-semibold text-[#00e054] tracking-wider uppercase flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#00e054] animate-pulse"></span>
-            Now Playing
-          </span>
-          <span class="text-xs sm:text-sm font-bold text-white tracking-tight">Exit Music (For a Film)</span>
-          <span class="text-[10px] text-[#9ab]">Radiohead</span>
-        </div>
-
-        <!-- Clickable Vinyl Button -->
-        <button onclick="toggleAudio()" id="vinylBtn" class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#1b222c] p-1 border-2 border-[#00e054] shadow-2xl backdrop-blur-md transform hover:scale-110 transition-transform duration-300 cursor-pointer overflow-hidden flex items-center justify-center focus:outline-none">
-          <div id="playOverlay" class="absolute inset-0 bg-black/40 hover:bg-transparent transition-colors z-10 flex items-center justify-center">
-            <svg id="playIcon" class="w-6 h-6 text-white drop-shadow-md" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-          <img 
-            src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDNqb2JoNjIzczhib3M3YTdweXRhd3R5djZobWJjYTVsNzV6cWx4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQ9Zw/cPa0VPT5ZR8d6s9UGU/giphy.gif" 
-            alt="Vinyl Record GIF" 
-            class="w-full h-full object-cover rounded-full object-center scale-125"
-          />
-        </button>
-      </div>
+  <!-- Floating Music Widget (Fixed Permanently at Top Right and Follows Scroll) -->
+  <div class="fixed top-6 right-6 z-50 flex items-center gap-3 group pointer-events-auto">
+    <!-- Full Song Title & Artist Popup (Appears on Hover) -->
+    <div class="bg-[#14181c]/95 backdrop-blur-md border border-[#2c3440] px-4 py-2.5 rounded-xl shadow-2xl opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none flex flex-col items-end">
+      <span class="text-[10px] font-semibold text-[#00e054] tracking-wider uppercase flex items-center gap-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#00e054] animate-pulse"></span>
+        Now Playing
+      </span>
+      <span class="text-xs sm:text-sm font-bold text-white tracking-tight">Exit Music (For a Film)</span>
+      <span class="text-[10px] text-[#9ab]">Radiohead</span>
     </div>
 
+    <!-- Clickable Vinyl Button -->
+    <button onclick="toggleAudio()" id="vinylBtn" class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#1b222c] p-1 border-2 border-[#00e054] shadow-2xl backdrop-blur-md transform hover:scale-110 transition-transform duration-300 cursor-pointer overflow-hidden flex items-center justify-center focus:outline-none">
+      <div id="playOverlay" class="absolute inset-0 bg-black/40 hover:bg-transparent transition-colors z-10 flex items-center justify-center">
+        <svg id="playIcon" class="w-6 h-6 text-white drop-shadow-md" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <img 
+        src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDNqb2JoNjIzczhib3M3YTdweXRhd3R5djZobWJjYTVsNzV6cWx4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQ9Zw/cPa0VPT5ZR8d6s9UGU/giphy.gif" 
+        alt="Vinyl Record GIF" 
+        class="w-full h-full object-cover rounded-full object-center scale-125"
+      />
+    </button>
+  </div>
+
+  <div class="max-w-6xl mx-auto space-y-12 relative z-10">
+    
     <!-- Hero Grid Section -->
     <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14 items-center">
       
