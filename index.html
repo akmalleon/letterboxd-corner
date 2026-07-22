@@ -31,14 +31,14 @@
 
 <section class="relative text-[#9ab] overflow-hidden py-16 md:py-28 px-4 sm:px-6 lg:px-8 font-sans">
   
-  <!-- Background GIF with Fixed True Autoplay -->
-  <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+  <!-- Background GIF with Absolute Fixed True Autoplay (Never pauses regardless of scrolling) -->
+  <div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; overflow: hidden;">
     <img 
       src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeW1tYzR3dW5icDE1MzhpZmw0MXk0eGNmYmdheDFna3ZlaHBtMHBqZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQ9Zw/8Q31McooUHTNu/giphy.gif" 
       alt="Background GIF" 
-      class="w-full h-full object-cover scale-105 filter blur-sm opacity-20 transform translate-y-0"
+      style="width: 100%; height: 100%; object-fit: cover; transform: scale(1.05); filter: blur(4px); opacity: 0.2;"
     />
-    <div class="absolute inset-0 bg-gradient-to-t from-[#14181c] via-[#14181c]/90 to-[#14181c]/70 backdrop-blur-[1px]"></div>
+    <div style="position: absolute; inset: 0; background: linear-gradient(to top, #14181c, rgba(20,24,28,0.9), rgba(20,24,28,0.7)); backdrop-filter: blur(1px);"></div>
   </div>
 
   <!-- Ambient background glow matching Letterboxd signature colors -->
@@ -238,11 +238,11 @@
           </div>
         </a>
 
-        <!-- 3. Parasite -->
+        <!-- 3. Parasite (Updated GIF) -->
         <a href="https://letterboxd.com/film/parasite-2019/" target="_blank" rel="noopener noreferrer" class="group relative bg-[#1b222c] rounded-xl overflow-hidden border border-[#2c3440] shadow-xl hover:border-[#00c0ff] transition-all duration-300 transform hover:-translate-y-1.5">
           <div class="aspect-[2/3] w-full overflow-hidden bg-neutral-900 relative">
             <img src="https://m.media-amazon.com/images/M/MV5BYjk1Y2U4MjQtY2ZiNS00OWQyLWI3MmYtZWUwNmRjYWRiNWNhXkEyXkFqcGc@._V1_.jpg" alt="Parasite Poster" class="poster-img w-full h-full object-cover transition-opacity duration-300 absolute inset-0 z-10" />
-            <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGV3YmU5MGFiOHNibnZrbzZieWh6am82eGV1Nmhmc3V6MTJhM293cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/elJ83m1tF7HIMhaBXA/giphy.gif" alt="Parasite Preview" class="hover-gif w-full h-full object-cover absolute inset-0 z-20" />
+            <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWo1ZXlyYmFlem5tMzBka2R1eWwycnYyNDM0cm03eXk5eGFlMTh4YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/U8AcSLMTswBJFhuhTE/giphy.gif" alt="Parasite Preview" class="hover-gif w-full h-full object-cover absolute inset-0 z-20" />
           </div>
           <div class="absolute inset-0 bg-gradient-to-t from-[#14181c] via-transparent opacity-80 z-20 pointer-events-none"></div>
           <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between z-30">
