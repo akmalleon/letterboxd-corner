@@ -66,6 +66,15 @@
     animation: flameGrow 1s infinite ease-in-out;
   }
 
+  /* Animasi menunjuk untuk tangan ikonik */
+  @keyframes pointBounce {
+    0%, 100% { transform: translateX(0) scale(1); }
+    50% { transform: translateX(-6px) scale(1.1); }
+  }
+  .animate-point {
+    animation: pointBounce 1.2s infinite ease-in-out;
+  }
+
   /* Animasi detak jantung untuk kata follow */
   @keyframes heartbeat {
     0%, 100% { transform: scale(1); }
@@ -139,11 +148,13 @@
 <div style="background-color: #14181c; width: 100%; min-height: 100vh; margin: 0; padding: 0;">
   <section class="relative text-[#9ab] overflow-hidden py-12 md:py-20 px-4 sm:px-6 lg:px-8 font-sans">
     
-    <!-- Background GIF -->
+    <!-- Background GIF (Dipaksa load langsung lewat eager) -->
     <div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; overflow: hidden; background-color: #14181c;">
       <img 
         src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeW1tYzR3dW5icDE1MzhpZmw0MXk0eGNmYmdheDFna3ZlaHBtMHBqZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/8Q31McooUHTNu/giphy.gif" 
         alt="Background GIF" 
+        loading="eager"
+        decoding="sync"
         style="width: 100%; height: 100%; object-fit: cover; transform: scale(1.05); filter: blur(4px); opacity: 0.2;"
       />
       <div style="position: absolute; inset: 0; background: linear-gradient(to top, #14181c, rgba(20,24,28,0.9), rgba(20,24,28,0.7)); backdrop-filter: blur(1px);"></div>
@@ -232,7 +243,6 @@
           <div class="space-y-3 max-w-xl">
             <p class="text-base sm:text-lg font-light leading-relaxed text-[#9ab] tracking-wide">
               Tempatku marathon film dan review apa aja yang habis ditonton. Ayo saling <span class="heart-beat">follow
-                <!-- Emoji Hati yang keluar melingkar dan fade out -->
                 <span class="floating-heart fh-1">💖</span>
                 <span class="floating-heart fh-2">💚</span>
                 <span class="floating-heart fh-3">🧡</span>
@@ -275,8 +285,8 @@
               <img 
                 src="https://cdn.lynkid.my.id/draft-products/22-07-2026/1784715076133_3618552.png" 
                 alt="A Cozy Corner for Film Lovers" 
+                loading="eager"
                 class="w-full h-auto rounded-xl object-cover transform hover:scale-[1.01] transition-transform duration-500"
-                loading="lazy"
               />
               
               <a href="https://letterboxd.com/akmalleon/watchlist/" target="_blank" rel="noopener noreferrer" class="absolute bottom-5 left-5 bg-[#14181c]/95 backdrop-blur-md px-3.5 py-2 rounded-xl border border-[#445566]/60 flex items-center gap-2.5 shadow-xl hover:border-[#ff8000] transition-colors group/badge">
@@ -311,8 +321,8 @@
           <!-- 1. Oldboy -->
           <a href="https://letterboxd.com/film/oldboy/" target="_blank" rel="noopener noreferrer" class="group relative bg-[#1b222c] rounded-xl overflow-hidden border border-[#2c3440] shadow-xl hover:border-[#ff8000] transition-all duration-300 transform hover:-translate-y-1.5">
             <div class="aspect-[2/3] w-full overflow-hidden bg-neutral-900 relative">
-              <img src="https://m.media-amazon.com/images/M/MV5BMTAwNzNjYWItZmI0Ni00ZTcyLWIwNWMtZjlmNGMxZTEyYTJmXkEyXkFqcGc@._V1_.jpg" alt="Oldboy Poster" class="poster-img w-full h-full object-cover transition-opacity duration-300 absolute inset-0 z-10" />
-              <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdW9yb3V1YXcxN3BncXZ6Y3hlc2h1cW51enhtOG5iNnc0MmM2c2UxYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT5LMXvXDtvGf3FBXq/giphy.gif" alt="Oldboy Preview" class="hover-gif w-full h-full object-cover absolute inset-0 z-20" />
+              <img src="https://m.media-amazon.com/images/M/MV5BMTAwNzNjYWItZmI0Ni00ZTcyLWIwNWMtZjlmNGMxZTEyYTJmXkEyXkFqcGc@._V1_.jpg" alt="Oldboy Poster" loading="eager" class="poster-img w-full h-full object-cover transition-opacity duration-300 absolute inset-0 z-10" />
+              <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdW9yb3V1YXcxN3BncXZ6Y3hlc2h1cW51enhtOG5iNnc0MmM2c2UxYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT5LMXvXDtvGf3FBXq/giphy.gif" alt="Oldboy Preview" loading="eager" class="hover-gif w-full h-full object-cover absolute inset-0 z-20" />
             </div>
             <div class="absolute inset-0 bg-gradient-to-t from-[#14181c] via-transparent opacity-80 z-20 pointer-events-none"></div>
             <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between z-30">
@@ -324,8 +334,8 @@
           <!-- 2. Memories of Murder -->
           <a href="https://letterboxd.com/film/memories-of-murder/" target="_blank" rel="noopener noreferrer" class="group relative bg-[#1b222c] rounded-xl overflow-hidden border border-[#2c3440] shadow-xl hover:border-[#00e054] transition-all duration-300 transform hover:-translate-y-1.5">
             <div class="aspect-[2/3] w-full overflow-hidden bg-neutral-900 relative">
-              <img src="https://m.media-amazon.com/images/M/MV5BYmRjOWE5NmMtYTdkYS00ODFlLWJiMTMtYzE2NDZlZjlkZDQ0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Memories of Murder Poster" class="poster-img w-full h-full object-cover transition-opacity duration-300 absolute inset-0 z-10" />
-              <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExaWVqMHN1YXY3eXR4cXh6dTU4OXAzNGM4NXgxbnVqNHhxbXdrM3NoNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Jc5W0ozc7cdu0QtfWw/giphy.gif" alt="Memories of Murder Preview" class="hover-gif w-full h-full object-cover absolute inset-0 z-20" />
+              <img src="https://m.media-amazon.com/images/M/MV5BYmRjOWE5NmMtYTdkYS00ODFlLWJiMTMtYzE2NDZlZjlkZDQ0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Memories of Murder Poster" loading="eager" class="poster-img w-full h-full object-cover transition-opacity duration-300 absolute inset-0 z-10" />
+              <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExaWVqMHN1YXY3eXR4cXh6dTU4OXAzNGM4NXgxbnVqNHhxbXdrM3NoNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Jc5W0ozc7cdu0QtfWw/giphy.gif" alt="Memories of Murder Preview" loading="eager" class="hover-gif w-full h-full object-cover absolute inset-0 z-20" />
             </div>
             <div class="absolute inset-0 bg-gradient-to-t from-[#14181c] via-transparent opacity-80 z-20 pointer-events-none"></div>
             <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between z-30">
@@ -337,8 +347,8 @@
           <!-- 3. Parasite -->
           <a href="https://letterboxd.com/film/parasite-2019/" target="_blank" rel="noopener noreferrer" class="group relative bg-[#1b222c] rounded-xl overflow-hidden border border-[#2c3440] shadow-xl hover:border-[#00c0ff] transition-all duration-300 transform hover:-translate-y-1.5">
             <div class="aspect-[2/3] w-full overflow-hidden bg-neutral-900 relative">
-              <img src="https://m.media-amazon.com/images/M/MV5BYjk1Y2U4MjQtY2ZiNS00OWQyLWI3MmYtZWUwNmRjYWRiNWNhXkEyXkFqcGc@._V1_.jpg" alt="Parasite Poster" class="poster-img w-full h-full object-cover transition-opacity duration-300 absolute inset-0 z-10" />
-              <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWo1ZXlyYmFlem5tMzBka2R1eWwycnYyNDM0cm03eXk5eGFlMTh4YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/U8AcSLMTswBJFhuhTE/giphy.gif" alt="Parasite Preview" class="hover-gif w-full h-full object-cover absolute inset-0 z-20" />
+              <img src="https://m.media-amazon.com/images/M/MV5BYjk1Y2U4MjQtY2ZiNS00OWQyLWI3MmYtZWUwNmRjYWRiNWNhXkEyXkFqcGc@._V1_.jpg" alt="Parasite Poster" loading="eager" class="poster-img w-full h-full object-cover transition-opacity duration-300 absolute inset-0 z-10" />
+              <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWo1ZXlyYmFlem5tMzBka2R1eWwycnYyNDM0cm03eXk5eGFlMTh4YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/U8AcSLMTswBJFhuhTE/giphy.gif" alt="Parasite Preview" loading="eager" class="hover-gif w-full h-full object-cover absolute inset-0 z-20" />
             </div>
             <div class="absolute inset-0 bg-gradient-to-t from-[#14181c] via-transparent opacity-80 z-20 pointer-events-none"></div>
             <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between z-30">
@@ -350,8 +360,8 @@
           <!-- 4. The Wolf of Wall Street -->
           <a href="https://letterboxd.com/film/the-wolf-of-wall-street/" target="_blank" rel="noopener noreferrer" class="group relative bg-[#1b222c] rounded-xl overflow-hidden border border-[#2c3440] shadow-xl hover:border-[#ff8000] transition-all duration-300 transform hover:-translate-y-1.5">
             <div class="aspect-[2/3] w-full overflow-hidden bg-neutral-900 relative">
-              <img src="https://m.media-amazon.com/images/M/MV5BMjIxMjgxNTk0MF5BMl5BanBnXkFtZTgwNjIyOTg2MDE@._V1_.jpg" alt="The Wolf of Wall Street Poster" class="poster-img w-full h-full object-cover transition-opacity duration-300 absolute inset-0 z-10" />
-              <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExa243cjc1MHE2OHU4NDV4cHhzbGV4N25iZnlwYTN5ODNrcTd2NGl1OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7LgKUsZiSjcRO/giphy.gif" alt="The Wolf of Wall Street Preview" class="hover-gif w-full h-full object-cover absolute inset-0 z-20" />
+              <img src="https://m.media-amazon.com/images/M/MV5BMjIxMjgxNTk0MF5BMl5BanBnXkFtZTgwNjIyOTg2MDE@._V1_.jpg" alt="The Wolf of Wall Street Poster" loading="eager" class="poster-img w-full h-full object-cover transition-opacity duration-300 absolute inset-0 z-10" />
+              <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExa243cjc1MHE2OHU4NDV4cHhzbGV4N25iZnlwYTN5ODNrcTd2NGl1OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7LgKUsZiSjcRO/giphy.gif" alt="The Wolf of Wall Street Preview" loading="eager" class="hover-gif w-full h-full object-cover absolute inset-0 z-20" />
             </div>
             <div class="absolute inset-0 bg-gradient-to-t from-[#14181c] via-transparent opacity-80 z-20 pointer-events-none"></div>
             <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between z-30">
@@ -454,6 +464,7 @@
           id="vinylImg"
           src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDNqb2JoNjIzczhib3M3YTdweXRhd3R5djZobWJjYTVsNzV6cWx4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cPa0VPT5ZR8d6s9UGU/giphy.gif"
           alt="Vinyl Record GIF"
+          loading="eager"
           class="w-full h-full object-cover rounded-full object-center scale-125 transition-all"
         />
       </button>
