@@ -354,28 +354,35 @@
         </div>
 
         <!-- Poster Grid with GIF Hover Preview -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mt-6">
           
-          <!-- 1. Oldboy (EDISI GOAT PREMIUM) -->
-          <a href="https://letterboxd.com/film/oldboy/" target="_blank" rel="noopener noreferrer" class="group relative bg-[#1b222c] rounded-xl overflow-hidden border-[3px] border-[#d4af37] shadow-[0_0_15px_rgba(212,175,55,0.4)] hover:shadow-[0_0_25px_rgba(212,175,55,0.7)] hover:border-[#ffdf00] transition-all duration-300 transform hover:-translate-y-1.5">
-            <div class="aspect-[2/3] w-full overflow-hidden bg-neutral-900 relative">
-              <img src="https://a.ltrbxd.com/resized/film-poster/5/1/4/5/4/51454-oldboy-0-2000-0-3000-crop.jpg?v=294dbcadef" alt="Oldboy Poster" loading="eager" class="poster-img w-full h-full object-cover transition-opacity duration-300 absolute inset-0 z-10" />
-              <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdW9yb3V1YXcxN3BncXZ6Y3hlc2h1cW51enhtOG5iNnc0MmM2c2UxYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT5LMXvXDtvGf3FBXq/giphy.gif" alt="Oldboy Preview" loading="eager" class="hover-gif w-full h-full object-cover absolute inset-0 z-20" />
-              
-              <!-- Stempel GOAT (Kiri Atas) - menggunakan mix-blend-multiply untuk menghilangkan background putih JPG -->
-              <img src="https://thumbs.dreamstime.com/b/goat-stamp-transparent-red-png-grunge-rubber-stamp-goat-transparent-stamp-red-grunge-png-rubber-stamp-seal-408532231.jpg" alt="GOAT Stamp" class="absolute top-2 left-2 w-16 h-16 sm:w-20 sm:h-20 z-30 mix-blend-multiply -rotate-12 opacity-95 pointer-events-none drop-shadow-md" />
-              
-              <!-- Animasi Kambing Pixel (Kanan Atas) -->
-              <img src="https://media.giphy.com/media/l41m3pCCdMLTNky4M/giphy.gif" alt="Pixel Goat" class="absolute top-2 right-2 w-12 h-12 sm:w-14 sm:h-14 z-30 pointer-events-none object-contain drop-shadow-lg" />
-            </div>
+          <!-- 1. Oldboy (EDISI GOAT PREMIUM REVISED) -->
+          <div class="relative group transition-all duration-300 transform hover:-translate-y-1.5 mt-4 sm:mt-0">
             
-            <div class="absolute inset-0 bg-gradient-to-t from-[#14181c] via-transparent opacity-80 z-20 pointer-events-none"></div>
-            <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between z-30">
-              <!-- Text judul diubah warnanya jadi gold juga untuk memperkuat kesan premium -->
-              <span class="text-xs font-bold text-[#ffd700] tracking-wider bg-[#14181c]/95 px-2.5 py-1 rounded-md border border-[#d4af37]/60 backdrop-blur-sm shadow-[0_0_10px_rgba(212,175,55,0.3)]">Oldboy (2003) 👑</span>
-              <span class="text-xs text-[#ffd700] font-bold animate-pulse">&rarr;</span>
+            <!-- Glow background dari belakang poster -->
+            <div class="absolute -inset-2.5 bg-gradient-to-b from-[#ffd700] to-[#ffaa00] rounded-xl blur-lg opacity-50 group-hover:opacity-100 group-hover:animate-pulse transition duration-500 z-0"></div>
+            
+            <!-- Mahkota (Crown) menempel di atas -->
+            <div class="absolute -top-7 left-1/2 transform -translate-x-1/2 z-40 text-4xl sm:text-5xl filter drop-shadow-[0_0_10px_rgba(255,215,0,0.8)] pointer-events-none">
+              👑
             </div>
-          </a>
+
+            <!-- Card Film -->
+            <a href="https://letterboxd.com/film/oldboy/" target="_blank" rel="noopener noreferrer" class="relative z-10 block h-full bg-[#1b222c] rounded-xl overflow-hidden border-[3px] border-[#ffd700] shadow-[0_0_15px_rgba(255,215,0,0.5)]">
+              <div class="aspect-[2/3] w-full overflow-hidden bg-neutral-900 relative">
+                <img src="https://a.ltrbxd.com/resized/film-poster/5/1/4/5/4/51454-oldboy-0-2000-0-3000-crop.jpg?v=294dbcadef" alt="Oldboy Poster" loading="eager" class="poster-img w-full h-full object-cover transition-opacity duration-300 absolute inset-0 z-10" />
+                <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdW9yb3V1YXcxN3BncXZ6Y3hlc2h1cW51enhtOG5iNnc0MmM2c2UxYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT5LMXvXDtvGf3FBXq/giphy.gif" alt="Oldboy Preview" loading="eager" class="hover-gif w-full h-full object-cover absolute inset-0 z-20" />
+              </div>
+              
+              <div class="absolute inset-0 bg-gradient-to-t from-[#14181c] via-transparent opacity-80 z-20 pointer-events-none"></div>
+              
+              <!-- Nama Film Edisi Gold -->
+              <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between z-30">
+                <span class="text-xs font-bold text-[#14181c] tracking-wider bg-gradient-to-r from-[#ffd700] to-[#d4af37] px-2.5 py-1 rounded-md shadow-md border border-white/30">Oldboy (2003)</span>
+                <span class="text-xs text-[#ffd700] font-bold drop-shadow-md">&rarr;</span>
+              </div>
+            </a>
+          </div>
 
           <!-- 2. Memories of Murder -->
           <a href="https://letterboxd.com/film/memories-of-murder/" target="_blank" rel="noopener noreferrer" class="group relative bg-[#1b222c] rounded-xl overflow-hidden border border-[#2c3440] shadow-xl hover:border-[#00e054] transition-all duration-300 transform hover:-translate-y-1.5">
