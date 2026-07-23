@@ -211,14 +211,11 @@
 
     <div class="max-w-6xl mx-auto space-y-10 relative z-10">
       
-      <!-- RUNNING TEXT WRAPPER DENGAN NOTES & EFEK MATRIX TEXT SCRAMBLE -->
-      <div class="space-y-2">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between px-1 text-xs font-medium text-[#89a] gap-1">
-          <span class="flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#00e054]"></span>
-            ini platform yang biasa Leon pakai
-          </span>
-          <span id="matrixScramble" class="font-mono text-[#00e054] tracking-wider">setiap running text di bawah bisa langsung diklik</span>
+      <!-- RUNNING TEXT WRAPPER DENGAN NOTES & EFEK MATRIX TEXT SCRAMBLE YANG DIGABUNG & SAMAR -->
+      <div class="space-y-1.5">
+        <div class="px-1 text-[11px] sm:text-xs font-mono text-[#687a8c] flex items-center gap-1.5 opacity-75">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#00e054]/60 animate-pulse"></span>
+          <span>ini platform yang biasa Leon pakai — <span id="matrixScramble" class="text-[#00e054]/80 tracking-wide">setiap running text di bawah bisa langsung diklik</span></span>
         </div>
 
         <div class="w-full bg-[#1b222c]/80 backdrop-blur-md border border-[#2c3440] py-3 rounded-xl overflow-hidden relative shadow-lg">
@@ -394,7 +391,7 @@
             <div class="absolute -inset-2.5 bg-gradient-to-tr from-[#e83838] via-[#ff5252] to-[#ff7b7b] rounded-xl warm-heavenly-glow z-0"></div>
             
             <!-- GIF Kambing Pixel (Gilly_GOAT_Run) Menapak Flat di Atas Bingkai Terluar Poster & Bisa Diklik ke Wikipedia Messi -->
-            <a href="https://id.wikipedia.org/wiki/Lionel_Messi" target="_blank" rel="noopener noreferrer" class="absolute -top-[1.65rem] right-0 z-40 transform hover:scale-125 transition-transform cursor-pointer" title="Greatest of All Time (Lionel Messi)">
+            <a href="https://id.wikipedia.org/wiki/Lionel_Messi" target="_blank" rel="noopener noreferrer" class="absolute -top-[1.65rem] right-0 z-40 transform hover:scale-125 transition-transform cursor-pointer" title="(Greatest of All Time) pssst coba kamu bisa klik kambing ini">
               <img src="https://payload.cargocollective.com/1/10/338897/13741330/Gilly_GOAT_Run.gif" alt="GOAT Running" class="w-10 h-10 sm:w-12 sm:h-12 object-contain transform scale-x-[-1] drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]" />
             </a>
 
@@ -524,7 +521,7 @@
         setSpinning(false);
       })();
 
-      // Efek Matrix Text Scramble / Decrypt Animation
+      // Efek Matrix Text Scramble / Decrypt Animation bergantian tiap 3 detik
       class TextScramble {
         constructor(el) {
           this.el = el;
@@ -539,8 +536,8 @@
           for (let i = 0; i < length; i++) {
             const from = oldText[i] || '';
             const to = newText[i] || '';
-            const start = Math.floor(Math.random() * 30);
-            const end = start + Math.floor(Math.random() * 30);
+            const start = Math.floor(Math.random() * 20);
+            const end = start + Math.floor(Math.random() * 20);
             this.queue.push({ from, to, start, end });
           }
           cancelAnimationFrame(this.frameRequest);
@@ -561,7 +558,7 @@
                 char = this.chars[Math.floor(Math.random() * this.chars.length)];
                 this.queue[i].char = char;
               }
-              output += `<span style="color: #ff8000;">${char}</span>`;
+              output += `<span style="color: #ff8000; opacity: 0.8;">${char}</span>`;
             } else {
               output += from;
             }
@@ -576,15 +573,21 @@
         }
       }
 
-      // Inisialisasi Matrix Scramble dengan Loop Efek Berkala
+      // Looping Matrix Scramble antara 2 teks setiap 3 detik
       const el = document.getElementById('matrixScramble');
-      const targetText = "setiap running text di bawah bisa langsung diklik";
+      const texts = [
+        "setiap running text di bawah bisa langsung diklik",
+        "platform rekomendasi favorit pilihan Leon"
+      ];
       const fx = new TextScramble(el);
       
       let counter = 0;
       const nextCycle = () => {
-        fx.setText(targetText).then(() => {
-          setTimeout(nextCycle, 5000);
+        fx.setText(texts[counter]).then(() => {
+          setTimeout(() => {
+            counter = (counter + 1) % texts.length;
+            nextCycle();
+          }, 3000); // Jeda 3 detik sebelum teks berikutnya di-scramble
         });
       };
       nextCycle();
