@@ -89,6 +89,11 @@
     color: #00e054;
     font-weight: 700;
     position: relative;
+    cursor: pointer;
+  }
+  .heart-beat:hover {
+    color: #ff8000;
+    text-decoration: underline;
   }
 
   /* Animasi Emoji Hati Keluar Menyebar & Fade */
@@ -299,13 +304,16 @@
           
           <div class="space-y-3 max-w-xl">
             <p class="text-base sm:text-lg font-light leading-relaxed text-[#9ab] tracking-wide">
-              Tempatku marathon film dan review apa aja yang habis ditonton. Ayo saling <span class="heart-beat">follow
+              Tempatku marathon film dan review apa aja yang habis ditonton. Ayo saling 
+              <a href="https://letterboxd.com/akmalleon/" target="_blank" rel="noopener noreferrer" class="heart-beat" title="Kunjungi profil Letterboxd Leon">
+                follow
                 <span class="floating-heart fh-1">💖</span>
                 <span class="floating-heart fh-2">💚</span>
                 <span class="floating-heart fh-3">🧡</span>
                 <span class="floating-heart fh-4">💖</span>
                 <span class="floating-heart fh-5">💚</span>
-              </span> Letterboxd atau lempar rekomendasi film buat ngisi waktu luang kita!
+              </a> 
+              Letterboxd atau lempar rekomendasi film buat ngisi waktu luang kita!
             </p>
           </div>
           
@@ -384,8 +392,8 @@
         <!-- Poster Grid with GIF Hover Preview -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mt-8">
           
-          <!-- 1. Oldboy (EDISI GOAT PREMIUM DENGAN CAHAYA SURGA MERAH WARM & KAMBING MENAPAK FLAT DI ATAS BINGKAI) -->
-          <div class="relative group transition-all duration-300 transform hover:-translate-y-1.5 mt-4 sm:mt-0">
+          <!-- 1. Oldboy (FIXED: Ukuran konsisten di mobile & PC, tidak mengecil) -->
+          <div class="relative group transition-all duration-300 transform hover:-translate-y-1.5 mt-4 sm:mt-0 w-full">
             
             <!-- Efek Cahaya Surga Merah Warm Bergelombang di Belakang Poster -->
             <div class="absolute -inset-2.5 bg-gradient-to-tr from-[#e83838] via-[#ff5252] to-[#ff7b7b] rounded-xl warm-heavenly-glow z-0"></div>
@@ -413,7 +421,7 @@
           </div>
 
           <!-- 2. Memories of Murder -->
-          <a href="https://letterboxd.com/film/memories-of-murder/" target="_blank" rel="noopener noreferrer" class="group relative bg-[#1b222c] rounded-xl overflow-hidden border border-[#2c3440] shadow-xl hover:border-[#00e054] transition-all duration-300 transform hover:-translate-y-1.5">
+          <a href="https://letterboxd.com/film/memories-of-murder/" target="_blank" rel="noopener noreferrer" class="group relative bg-[#1b222c] rounded-xl overflow-hidden border border-[#2c3440] shadow-xl hover:border-[#00e054] transition-all duration-300 transform hover:-translate-y-1.5 w-full">
             <div class="aspect-[2/3] w-full overflow-hidden bg-neutral-900 relative">
               <img src="https://a.ltrbxd.com/resized/sm/upload/84/xt/e8/mw/gawnVe9cFowdoDLo9Pok12NTw39-0-2000-0-3000-crop.jpg?v=7cad204593" alt="Memories of Murder Poster" loading="eager" class="poster-img w-full h-full object-cover transition-opacity duration-300 absolute inset-0 z-10" />
               <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExaWVqMHN1YXY3eXR4cXh6dTU4OXAzNGM4NXgxbnVqNHhxbXdrM3NoNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Jc5W0ozc7cdu0QtfWw/giphy.gif" alt="Memories of Murder Preview" loading="eager" class="hover-gif w-full h-full object-cover absolute inset-0 z-20" />
@@ -426,7 +434,7 @@
           </a>
 
           <!-- 3. The Wolf of Wall Street -->
-          <a href="https://letterboxd.com/film/the-wolf-of-wall-street/" target="_blank" rel="noopener noreferrer" class="group relative bg-[#1b222c] rounded-xl overflow-hidden border border-[#2c3440] shadow-xl hover:border-[#ff8000] transition-all duration-300 transform hover:-translate-y-1.5">
+          <a href="https://letterboxd.com/film/the-wolf-of-wall-street/" target="_blank" rel="noopener noreferrer" class="group relative bg-[#1b222c] rounded-xl overflow-hidden border border-[#2c3440] shadow-xl hover:border-[#ff8000] transition-all duration-300 transform hover:-translate-y-1.5 w-full">
             <div class="aspect-[2/3] w-full overflow-hidden bg-neutral-900 relative">
               <img src="https://m.media-amazon.com/images/M/MV5BMjIxMjgxNTk0MF5BMl5BanBnXkFtZTgwNjIyOTg2MDE@._V1_.jpg" alt="The Wolf of Wall Street Poster" loading="eager" class="poster-img w-full h-full object-cover transition-opacity duration-300 absolute inset-0 z-10" />
               <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExa243cjc1MHE2OHU4NDV4cHhzbGV4N25iZnlwYTN5ODNrcTd2NGl1OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7LgKUsZiSjcRO/giphy.gif" alt="The Wolf of Wall Street Preview" loading="eager" class="hover-gif w-full h-full object-cover absolute inset-0 z-20" />
@@ -439,7 +447,7 @@
           </a>
 
           <!-- 4. Parasite -->
-          <a href="https://letterboxd.com/film/parasite-2019/" target="_blank" rel="noopener noreferrer" class="group relative bg-[#1b222c] rounded-xl overflow-hidden border border-[#2c3440] shadow-xl hover:border-[#00c0ff] transition-all duration-300 transform hover:-translate-y-1.5">
+          <a href="https://letterboxd.com/film/parasite-2019/" target="_blank" rel="noopener noreferrer" class="group relative bg-[#1b222c] rounded-xl overflow-hidden border border-[#2c3440] shadow-xl hover:border-[#00c0ff] transition-all duration-300 transform hover:-translate-y-1.5 w-full">
             <div class="aspect-[2/3] w-full overflow-hidden bg-neutral-900 relative">
               <img src="https://m.media-amazon.com/images/M/MV5BYjk1Y2U4MjQtY2ZiNS00OWQyLWI3MmYtZWUwNmRjYWRiNWNhXkEyXkFqcGc@._V1_.jpg" alt="Parasite Poster" loading="eager" class="poster-img w-full h-full object-cover transition-opacity duration-300 absolute inset-0 z-10" />
               <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWo1ZXlyYmFlem5tMzBka2R1eWwycnYyNDM0cm03eXk5eGFlMTh4YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/U8AcSLMTswBJFhuhTE/giphy.gif" alt="Parasite Preview" loading="eager" class="hover-gif w-full h-full object-cover absolute inset-0 z-20" />
@@ -587,7 +595,7 @@
           setTimeout(() => {
             counter = (counter + 1) % texts.length;
             nextCycle();
-          }, 3000); // Jeda 3 detik sebelum teks berikutnya di-scramble
+          }, 3000);
         });
       };
       nextCycle();
