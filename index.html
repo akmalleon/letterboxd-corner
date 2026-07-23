@@ -192,6 +192,16 @@
   .warm-heavenly-glow {
     animation: heavenlyRedWave 4s ease-in-out infinite;
   }
+
+  /* Styling khusus untuk efek Matrix Scramble bergantian */
+  .matrix-header-text {
+    color: #00e054;
+    font-weight: bold;
+    opacity: 0.9;
+    font-family: monospace; /* Monospace agar efek glitch lebih terasa */
+    letter-spacing: 0.5px;
+    display: inline-block;
+  }
   </style>
 </head>
 <body>
@@ -216,11 +226,12 @@
 
     <div class="max-w-6xl mx-auto space-y-10 relative z-10">
       
-      <!-- RUNNING TEXT WRAPPER DENGAN NOTES & EFEK MATRIX TEXT SCRAMBLE YANG DIGABUNG & SAMAR -->
+      <!-- RUNNING TEXT WRAPPER DENGAN NOTES & EFEK MATRIX TEXT SCRAMBLE -->
       <div class="space-y-1.5">
-        <div class="px-1 text-[11px] sm:text-xs font-mono text-[#687a8c] flex items-center gap-1.5 opacity-75">
-          <span class="w-1.5 h-1.5 rounded-full bg-[#00e054]/60 animate-pulse"></span>
-          <span>ini platform yang biasa Leon pakai — <span id="matrixScramble" class="text-[#00e054]/80 tracking-wide">setiap running text di bawah bisa langsung diklik</span></span>
+        <!-- HEADER CATATAN: Bergantian antara 2 teks dengan efek Matrix bergantian -->
+        <div class="px-1 text-[11px] sm:text-xs font-mono text-[#687a8c] flex items-center gap-1.5 opacity-75 h-5 overflow-hidden">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#00e054]/60 animate-pulse flex-shrink-0"></span>
+          <span id="matrixHeaderScramble" class="matrix-header-text tracking-wide">inisialisasi teks...</span>
         </div>
 
         <div class="w-full bg-[#1b222c]/80 backdrop-blur-md border border-[#2c3440] py-3 rounded-xl overflow-hidden relative shadow-lg">
@@ -392,7 +403,7 @@
         <!-- Poster Grid with GIF Hover Preview -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mt-8">
           
-          <!-- 1. Oldboy (FIXED: Ukuran konsisten di mobile & PC, tidak mengecil) -->
+          <!-- 1. Oldboy (EDISI GOAT PREMIUM DENGAN CAHAYA SURGA MERAH WARM & KAMBING MENAPAK FLAT DI ATAS BINGKAI) -->
           <div class="relative group transition-all duration-300 transform hover:-translate-y-1.5 mt-4 sm:mt-0 w-full">
             
             <!-- Efek Cahaya Surga Merah Warm Bergelombang di Belakang Poster -->
@@ -582,7 +593,7 @@
       }
 
       // Looping Matrix Scramble antara 2 teks setiap 3 detik
-      const el = document.getElementById('matrixScramble');
+      const el = document.getElementById('matrixHeaderScramble');
       const texts = [
         "setiap running text di bawah bisa langsung diklik",
         "platform rekomendasi favorit pilihan Leon"
