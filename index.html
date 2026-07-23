@@ -169,45 +169,34 @@
     }
   }
 
-  /* --- ANIMASI ELEGAN GOAT OLDBOY --- */
+  /* --- ANIMASI ELEGANT WARM RED HEAVENLY GLOW & AURA --- */
   
-  /* Efek Lampu Neon Bergelombang di Belakang */
-  @keyframes neonWave {
+  /* Efek Cahaya Surga Merah Warm Bergelombang */
+  @keyframes heavenlyRedWave {
     0%, 100% {
-      opacity: 0.55;
-      filter: blur(12px);
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), inset 0 0 15px rgba(255, 170, 0, 0.4);
+      opacity: 0.45;
+      filter: blur(16px);
+      box-shadow: 0 0 25px rgba(235, 64, 52, 0.4), inset 0 0 15px rgba(255, 90, 80, 0.3);
       transform: scale(1);
     }
     50% {
-      opacity: 0.95;
-      filter: blur(18px);
-      box-shadow: 0 0 45px rgba(255, 223, 0, 0.9), inset 0 0 25px rgba(255, 215, 0, 0.7);
-      transform: scale(1.03);
+      opacity: 0.8;
+      filter: blur(24px);
+      box-shadow: 0 0 50px rgba(245, 75, 60, 0.7), inset 0 0 30px rgba(255, 120, 100, 0.5);
+      transform: scale(1.02);
     }
   }
-  .neon-glow-bg {
-    animation: neonWave 3s ease-in-out infinite;
+  .warm-heavenly-glow {
+    animation: heavenlyRedWave 4s ease-in-out infinite;
   }
 
-  /* Animasi Rotasi Horizontal 3D (Efek Koin Berputar Menyamping) untuk Mahkota */
-  @keyframes horizontalSpin3D {
-    0% {
-      transform: translateX(-50%) rotateY(0deg) scale(1);
-    }
-    50% {
-      transform: translateX(-50%) rotateY(90deg) scale(0.85);
-      filter: brightness(1.3);
-    }
-    100% {
-      transform: translateX(-50%) rotateY(360deg) scale(1);
-    }
+  /* Aura Keemasan Elegan Pengganti Mahkota */
+  @keyframes auraPulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.08); }
   }
-  .crown-horizontal-spin {
-    animation: horizontalSpin3D 4s infinite linear;
-    transform-origin: center center;
-    perspective: 1000px;
-    will-change: transform;
+  .gold-halo {
+    animation: auraPulse 3s ease-in-out infinite;
   }
   </style>
 </head>
@@ -395,23 +384,21 @@
         </div>
 
         <!-- Poster Grid with GIF Hover Preview -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mt-6">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mt-8">
           
-          <!-- 1. Oldboy (EDISI GOAT PREMIUM DENGAN MAHKOTA ELEGAN BERPUTAR & KAMBING MENAPAK DI ATAS POSTER) -->
-          <div class="relative group transition-all duration-300 transform hover:-translate-y-1.5 mt-6 sm:mt-0">
+          <!-- 1. Oldboy (EDISI GOAT PREMIUM DENGAN CAHAYA SURGA MERAH WARM & KAMBING MENAPAK KE MESSI) -->
+          <div class="relative group transition-all duration-300 transform hover:-translate-y-1.5 mt-4 sm:mt-0">
             
-            <!-- Efek Lampu Neon Bergelombang di Belakang Poster -->
-            <div class="absolute -inset-2 bg-gradient-to-tr from-[#ffd700] via-[#ffaa00] to-[#ffcc00] rounded-xl neon-glow-bg z-0"></div>
+            <!-- Efek Cahaya Surga Merah Warm Bergelombang di Belakang Poster -->
+            <div class="absolute -inset-2.5 bg-gradient-to-tr from-[#e83838] via-[#ff5252] to-[#ff7b7b] rounded-xl warm-heavenly-glow z-0"></div>
             
-            <!-- Mahkota Elegan Asli Berputar Horizontal 3D di Atas Poster -->
-            <div class="absolute -top-10 left-1/2 crown-horizontal-spin z-40 pointer-events-none drop-shadow-[0_0_12px_rgba(255,215,0,0.9)]">
-              <img src="https://static.vecteezy.com/system/resources/previews/010/876/993/original/golden-crown-transparent-free-png.png" alt="Elegan Crown" class="w-12 h-12 sm:w-14 sm:h-14 object-contain filter drop-shadow-md" />
-            </div>
+            <!-- Aura Keemasan Elegan di Atas Poster (Pengganti Mahkota) -->
+            <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-28 h-8 bg-gradient-to-r from-transparent via-[#ffd700]/50 to-transparent blur-md rounded-full gold-halo z-30 pointer-events-none"></div>
 
-            <!-- GIF Kambing Pixel (Gilly_GOAT_Run) Menginjak/Menapak di Atas Kanan Poster -->
-            <div class="absolute -top-6 -right-3 z-50 pointer-events-none filter drop-shadow-md">
-              <img src="https://payload.cargocollective.com/1/10/338897/13741330/Gilly_GOAT_Run.gif" alt="GOAT Running" class="w-12 h-12 sm:w-14 sm:h-14 object-contain transform scale-x-[-1]" />
-            </div>
+            <!-- GIF Kambing Pixel (Gilly_GOAT_Run) Menapak di Bagian Terluar Atas Poster & Bisa Diklik ke Wikipedia Messi -->
+            <a href="https://id.wikipedia.org/wiki/Lionel_Messi" target="_blank" rel="noopener noreferrer" class="absolute -top-7 right-0 z-50 transform hover:scale-125 transition-transform cursor-pointer" title="GOAT (Lionel Messi)">
+              <img src="https://payload.cargocollective.com/1/10/338897/13741330/Gilly_GOAT_Run.gif" alt="GOAT Running" class="w-12 h-12 sm:w-14 sm:h-14 object-contain transform scale-x-[-1] drop-shadow-[0_4px_6px_rgba(0,0,0,0.8)]" />
+            </a>
 
             <!-- Card Film -->
             <a href="https://letterboxd.com/film/oldboy/" target="_blank" rel="noopener noreferrer" class="relative z-10 block h-full bg-[#1b222c] rounded-xl overflow-hidden border border-[#2c3440] shadow-2xl">
