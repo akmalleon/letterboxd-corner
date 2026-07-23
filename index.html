@@ -168,6 +168,38 @@
       right: 1.5rem;
     }
   }
+
+  /* --- ANIMASI KHUSUS GOAT OLDBOY --- */
+  
+  /* Efek Lampu Neon Bergelombang di Belakang */
+  @keyframes neonWave {
+    0%, 100% {
+      opacity: 0.55;
+      filter: blur(12px);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), inset 0 0 15px rgba(255, 170, 0, 0.4);
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.95;
+      filter: blur(18px);
+      box-shadow: 0 0 45px rgba(255, 223, 0, 0.9), inset 0 0 25px rgba(255, 215, 0, 0.7);
+      transform: scale(1.03);
+    }
+  }
+  .neon-glow-bg {
+    animation: neonWave 3s ease-in-out infinite;
+  }
+
+  /* Animasi Rotasi Halus & Smooth untuk Mahkota */
+  @keyframes smoothRotate {
+    0% { transform: translateX(-50%) rotate(-6deg); }
+    50% { transform: translateX(-50%) rotate(6deg); }
+    100% { transform: translateX(-50%) rotate(-6deg); }
+  }
+  .crown-smooth {
+    animation: smoothRotate 4s ease-in-out infinite;
+    transform-origin: bottom center;
+  }
   </style>
 </head>
 <body>
@@ -356,19 +388,19 @@
         <!-- Poster Grid with GIF Hover Preview -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mt-6">
           
-          <!-- 1. Oldboy (EDISI GOAT PREMIUM REVISED) -->
+          <!-- 1. Oldboy (EDISI GOAT PREMIUM DENGAN NEON & MAHKOTA BERPUTAR HALUS) -->
           <div class="relative group transition-all duration-300 transform hover:-translate-y-1.5 mt-4 sm:mt-0">
             
-            <!-- Glow background dari belakang poster -->
-            <div class="absolute -inset-2.5 bg-gradient-to-b from-[#ffd700] to-[#ffaa00] rounded-xl blur-lg opacity-50 group-hover:opacity-100 group-hover:animate-pulse transition duration-500 z-0"></div>
+            <!-- Efek Lampu Neon Bergelombang di Belakang Poster -->
+            <div class="absolute -inset-2 bg-gradient-to-tr from-[#ffd700] via-[#ffaa00] to-[#ffcc00] rounded-xl neon-glow-bg z-0"></div>
             
-            <!-- Mahkota (Crown) menempel di atas -->
-            <div class="absolute -top-7 left-1/2 transform -translate-x-1/2 z-40 text-4xl sm:text-5xl filter drop-shadow-[0_0_10px_rgba(255,215,0,0.8)] pointer-events-none">
+            <!-- Mahkota Berputar Smooth di Atas Poster -->
+            <div class="absolute -top-7 left-1/2 crown-smooth z-40 text-4xl sm:text-5xl filter drop-shadow-[0_0_12px_rgba(255,215,0,0.9)] pointer-events-none">
               👑
             </div>
 
             <!-- Card Film -->
-            <a href="https://letterboxd.com/film/oldboy/" target="_blank" rel="noopener noreferrer" class="relative z-10 block h-full bg-[#1b222c] rounded-xl overflow-hidden border-[3px] border-[#ffd700] shadow-[0_0_15px_rgba(255,215,0,0.5)]">
+            <a href="https://letterboxd.com/film/oldboy/" target="_blank" rel="noopener noreferrer" class="relative z-10 block h-full bg-[#1b222c] rounded-xl overflow-hidden border-[3px] border-[#ffd700] shadow-[0_0_20px_rgba(255,215,0,0.6)]">
               <div class="aspect-[2/3] w-full overflow-hidden bg-neutral-900 relative">
                 <img src="https://a.ltrbxd.com/resized/film-poster/5/1/4/5/4/51454-oldboy-0-2000-0-3000-crop.jpg?v=294dbcadef" alt="Oldboy Poster" loading="eager" class="poster-img w-full h-full object-cover transition-opacity duration-300 absolute inset-0 z-10" />
                 <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdW9yb3V1YXcxN3BncXZ6Y3hlc2h1cW51enhtOG5iNnc0MmM2c2UxYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT5LMXvXDtvGf3FBXq/giphy.gif" alt="Oldboy Preview" loading="eager" class="hover-gif w-full h-full object-cover absolute inset-0 z-20" />
