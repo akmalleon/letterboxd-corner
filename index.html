@@ -10,6 +10,9 @@
     margin: 0;
     padding: 0;
     background-color: #14181c;
+    overflow-x: hidden; /* Mencegah scroll horizontal */
+    width: 100%;
+    height: 100%;
   }
   @keyframes marquee {
     0% { transform: translateX(0%); }
@@ -193,18 +196,18 @@
     animation: heavenlyRedWave 4s ease-in-out infinite;
   }
 
-  /* Styling khusus untuk efek Matrix Scramble bergantian */
+  /* Styling khusus untuk efek Matrix Scramble di Header yang DIPERBAIKI */
   .matrix-header-text {
-    color: #00e054;
+    font-family: 'Courier New', Courier, monospace;
+    color: #00e054 !important; /* Hijau Neon */
     font-weight: bold;
-    opacity: 0.9;
-    font-family: monospace; /* Monospace agar efek glitch lebih terasa */
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     display: inline-block;
+    min-width: 280px; /* Mencegah layout shift */
   }
   </style>
 </head>
-<body>
+<body class="antialiased">
 
 <div style="background-color: #14181c; width: 100%; min-height: 100vh; margin: 0; padding: 0;">
   <section class="relative text-[#9ab] overflow-hidden py-12 md:py-20 px-4 sm:px-6 lg:px-8 font-sans">
@@ -228,12 +231,13 @@
       
       <!-- RUNNING TEXT WRAPPER DENGAN NOTES & EFEK MATRIX TEXT SCRAMBLE -->
       <div class="space-y-1.5">
-        <!-- HEADER CATATAN: Bergantian antara 2 teks dengan efek Matrix bergantian -->
-        <div class="px-1 text-[11px] sm:text-xs font-mono text-[#687a8c] flex items-center gap-1.5 opacity-75 h-5 overflow-hidden">
-          <span class="w-1.5 h-1.5 rounded-full bg-[#00e054]/60 animate-pulse flex-shrink-0"></span>
-          <span id="matrixHeaderScramble" class="matrix-header-text tracking-wide">inisialisasi teks...</span>
+        <!-- Baris Notes dengan efek Matrix Scramble (Script DIPERBAIKI) -->
+        <div class="px-1 text-[11px] sm:text-xs font-mono text-[#687a8c] flex items-center gap-1.5 opacity-90 h-6 overflow-hidden">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#00e054]/80 animate-pulse flex-shrink-0"></span>
+          <span>ini platform yang biasa Leon pakai — <span id="matrixScramble" class="matrix-header-text"></span></span>
         </div>
 
+        <!-- Baris Running Text Utama -->
         <div class="w-full bg-[#1b222c]/80 backdrop-blur-md border border-[#2c3440] py-3 rounded-xl overflow-hidden relative shadow-lg">
           <div class="animate-marquee flex items-center whitespace-nowrap gap-10 text-xs sm:text-sm font-medium">
             
@@ -593,7 +597,7 @@
       }
 
       // Looping Matrix Scramble antara 2 teks setiap 3 detik
-      const el = document.getElementById('matrixHeaderScramble');
+      const el = document.getElementById('matrixScramble');
       const texts = [
         "setiap running text di bawah bisa langsung diklik",
         "platform rekomendasi favorit pilihan Leon"
@@ -606,7 +610,7 @@
           setTimeout(() => {
             counter = (counter + 1) % texts.length;
             nextCycle();
-          }, 3000);
+          }, 3000); // Jeda 3 detik
         });
       };
       nextCycle();
@@ -614,7 +618,7 @@
 
   </section>
 
-  <!-- Vinyl player -->
+  <!-- Vinyl player mengikuti scroll -->
   <div class="vinyl-floating flex items-center gap-2 group">
     
     <!-- Bubble Text -->
