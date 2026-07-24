@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,10 +37,10 @@
     opacity: 0;
   }
 
-  /* --- ANIMASI ELEGAN MUNCUL SEKALI SAAT DI-SCROLL (FADE IN + SLIDE UP HALUS) --- */
+  /* --- TRANSISI MUNCUL ELEGAN SAAT DISCROLL (Tanpa Menghilang Lagi) --- */
   .poster-reveal-card {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(35px);
     transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
   }
@@ -284,62 +284,62 @@
 
     <div class="max-w-6xl mx-auto space-y-10 relative z-10">
       
-      <!-- RUNNING TEXT DENGAN FRAME SEMULA & LOGO MEMENUHI TINGGI FRAME (h-6 sm:h-7) -->
+      <!-- RUNNING TEXT DENGAN FRAME SEMULA & LOGO MEMENUHI TINGGI FRAME (h-5 sm:h-6 w-auto) -->
       <div class="space-y-1.5">
         <div class="px-1 text-[11px] sm:text-xs font-mono text-[#687a8c] flex items-center gap-1.5 opacity-75">
           <span class="w-1.5 h-1.5 rounded-full bg-[#00e054]/60 animate-pulse"></span>
           <span>ini platform yang biasa Leon pakai — <span id="matrixScramble" class="text-[#00e054]/80 tracking-wide">setiap running text di bawah bisa langsung diklik</span></span>
         </div>
 
-        <div class="w-full bg-[#1b222c]/80 backdrop-blur-md border border-[#2c3440] py-2.5 rounded-xl overflow-hidden relative shadow-lg">
+        <div class="w-full bg-[#1b222c]/80 backdrop-blur-md border border-[#2c3440] py-3 rounded-xl overflow-hidden relative shadow-lg">
           <div class="animate-marquee flex items-center whitespace-nowrap gap-10 text-xs sm:text-sm font-medium">
             
-            <!-- Set Pertama (Logo Proporsional Memenuhi Tinggi Frame) -->
+            <!-- Set Pertama (Logo Proporsional Memenuhi Tinggi Frame Tanpa Membesarkan Frame) -->
             <a href="https://pahe.ink/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 hover:text-white transition-colors group">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUD7tpkhR3Dc1pb4tub3EGjai9OyebPPe4e4aEdXyjLyaCoONA9YXx5VY&s=10" alt="Pahe Logo" class="h-6 sm:h-7 w-auto object-contain rounded" />
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUD7tpkhR3Dc1pb4tub3EGjai9OyebPPe4e4aEdXyjLyaCoONA9YXx5VY&s=10" alt="Pahe Logo" class="h-5 sm:h-6 w-auto object-contain rounded" />
               <span>(Pahe) Tempat download film bajakan &rarr;</span>
             </a>
             <span class="text-[#789]">•</span>
 
             <a href="https://letterboxd.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 hover:text-[#ff8000] transition-colors group">
-              <img src="https://a.ltrbxd.com/logos/letterboxd-logo-alt-v-neg-rgb-1000px.png" alt="Letterboxd Logo" class="h-6 sm:h-7 w-auto object-contain" />
+              <img src="https://a.ltrbxd.com/logos/letterboxd-logo-alt-v-neg-rgb-1000px.png" alt="Letterboxd Logo" class="h-5 sm:h-6 w-auto object-contain" />
               <span>(Letterboxd) Platform untuk rating dan review film &rarr;</span>
             </a>
             <span class="text-[#789]">•</span>
 
             <a href="https://subsource.net/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 hover:text-[#00c0ff] transition-colors group">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrSQo9Hyq5qT65afpCPg8VWlZOfU5BJ-RBplZC4wNbOR1UQW8p6yXKUyk&s=10" alt="Subsource Logo" class="h-6 sm:h-7 w-auto object-contain rounded" />
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrSQo9Hyq5qT65afpCPg8VWlZOfU5BJ-RBplZC4wNbOR1UQW8p6yXKUyk&s=10" alt="Subsource Logo" class="h-5 sm:h-6 w-auto object-contain rounded" />
               <span>(SubSource) buat download subtitle film &rarr;</span>
             </a>
             <span class="text-[#789]">•</span>
 
             <a href="https://www.imdb.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 hover:text-[#f5c518] transition-colors group">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjMpi_8gO8BOwX786yzcX1g7ZN6hzZyNdyCXwNWiSk_A&s=10" alt="IMDb Logo" class="h-6 sm:h-7 w-auto object-contain rounded" />
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjMpi_8gO8BOwX786yzcX1g7ZN6hzZyNdyCXwNWiSk_A&s=10" alt="IMDb Logo" class="h-5 sm:h-6 w-auto object-contain rounded" />
               <span>(IMDb) cek rating & sinopsis film sebelum nonton &rarr;</span>
             </a>
             <span class="text-[#789]">•</span>
 
             <!-- Set Kedua (Duplikat untuk Looping Mulus) -->
             <a href="https://pahe.ink/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 hover:text-white transition-colors group">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUD7tpkhR3Dc1pb4tub3EGjai9OyebPPe4e4aEdXyjLyaCoONA9YXx5VY&s=10" alt="Pahe Logo" class="h-6 sm:h-7 w-auto object-contain rounded" />
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUD7tpkhR3Dc1pb4tub3EGjai9OyebPPe4e4aEdXyjLyaCoONA9YXx5VY&s=10" alt="Pahe Logo" class="h-5 sm:h-6 w-auto object-contain rounded" />
               <span>(Pahe) Tempat download film bajakan &rarr;</span>
             </a>
             <span class="text-[#789]">•</span>
 
             <a href="https://letterboxd.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 hover:text-[#ff8000] transition-colors group">
-              <img src="https://a.ltrbxd.com/logos/letterboxd-logo-alt-v-neg-rgb-1000px.png" alt="Letterboxd Logo" class="h-6 sm:h-7 w-auto object-contain" />
+              <img src="https://a.ltrbxd.com/logos/letterboxd-logo-alt-v-neg-rgb-1000px.png" alt="Letterboxd Logo" class="h-5 sm:h-6 w-auto object-contain" />
               <span>(Letterboxd) Platform untuk rating dan review film &rarr;</span>
             </a>
             <span class="text-[#789]">•</span>
 
             <a href="https://subsource.net/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 hover:text-[#00c0ff] transition-colors group">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrSQo9Hyq5qT65afpCPg8VWlZOfU5BJ-RBplZC4wNbOR1UQW8p6yXKUyk&s=10" alt="Subsource Logo" class="h-6 sm:h-7 w-auto object-contain rounded" />
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrSQo9Hyq5qT65afpCPg8VWlZOfU5BJ-RBplZC4wNbOR1UQW8p6yXKUyk&s=10" alt="Subsource Logo" class="h-5 sm:h-6 w-auto object-contain rounded" />
               <span>(SubSource) buat download subtitle film &rarr;</span>
             </a>
             <span class="text-[#789]">•</span>
 
             <a href="https://www.imdb.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 hover:text-[#f5c518] transition-colors group">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjMpi_8gO8BOwX786yzcX1g7ZN6hzZyNdyCXwNWiSk_A&s=10" alt="IMDb Logo" class="h-6 sm:h-7 w-auto object-contain rounded" />
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjMpi_8gO8BOwX786yzcX1g7ZN6hzZyNdyCXwNWiSk_A&s=10" alt="IMDb Logo" class="h-5 sm:h-6 w-auto object-contain rounded" />
               <span>(IMDb) cek rating & sinopsis film sebelum nonton &rarr;</span>
             </a>
             <span class="text-[#789]">•</span>
@@ -436,7 +436,7 @@
 
       </div>
 
-      <!-- Favorite 4 Films Showcase Section dengan Animasi Elegan (Fade In & Slide Up Stabil) -->
+      <!-- Favorite 4 Films Showcase Section dengan Transisi Elegan (Muncul Sekali, Tidak Menghilang Lagi) -->
       <div class="pt-8 border-t border-[#2c3440]/60">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
           <div>
@@ -448,7 +448,7 @@
           </div>
         </div>
 
-        <!-- Poster Grid with Elegant Fade-In/Slide-Up Animation -->
+        <!-- Poster Grid with Smooth Scroll Reveal Transition -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mt-8">
           
           <!-- 1. Oldboy -->
@@ -559,7 +559,7 @@
       <source src="Crystal Castles - Vanished.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- JavaScript (Musik, Player, & Observer Animasi Elegan Masuk Sekali Saja) -->
+    <!-- JavaScript (Musik, Player, & Transisi Elegan Poster) -->
     <script>
       (function initMusicPlayer() {
         var music = document.getElementById("bgMusic");
@@ -619,7 +619,7 @@
         setSpinning(false);
       })();
 
-      // Intersection Observer: Elemen Muncul Elegan Sekali Saat Discroll
+      // Intersection Observer: Animasi Elegan Muncul Saat Discroll (Hanya Memicu Sekali agar Tidak Hilang Lagi)
       document.addEventListener("DOMContentLoaded", function () {
         const cards = document.querySelectorAll('.poster-reveal-card');
 
@@ -633,7 +633,7 @@
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               entry.target.classList.add('is-visible');
-              observer.unobserve(entry.target); // Hanya animasikan sekali saat pertama kali masuk layar
+              observer.unobserve(entry.target); // Berhenti mengawasi setelah muncul agar poster tetap stay di tempat
             }
           });
         }, observerOptions);
