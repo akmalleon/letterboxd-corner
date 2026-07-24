@@ -36,31 +36,25 @@
     opacity: 0;
   }
 
-  /* Styling Tombol Letterboxd dengan Background GIF Api Hitam (Blend Mode Screen) */
-  .fire-btn-gif {
+  /* 🔥 Efek Tombol Terbakar Menyeluruh (Api Membungkus dan Melahap Tombol) */
+  .fire-wrapper {
     position: relative;
-    overflow: hidden !important;
-    border: 1px solid rgba(255, 140, 0, 0.4);
-    box-shadow: 0 4px 20px rgba(255, 69, 0, 0.3);
+    display: inline-flex;
+    padding: 12px; /* Memberikan ruang ekstra agar lidah api meluber keluar membakar sekeliling tombol */
+    margin: -12px;
   }
 
-  /* Lapisan GIF Api Berlatar Hitam yang Disatukan dengan mix-blend-mode: screen */
-  .fire-bg-gif {
+  .fire-overlay-gif {
     position: absolute;
-    inset: -15px; /* Memperluas area api agar meluber keluar tombol secara estetis */
-    width: calc(100% + 30px);
-    height: calc(100% + 30px);
-    object-fit: cover;
+    inset: -6px;
+    width: calc(100% + 12px);
+    height: calc(100% + 12px);
+    object-fit: fill;
     pointer-events: none;
-    mix-blend-mode: screen; /* Otomatis menghilangkan warna hitam pekat pada GIF */
-    opacity: 0.9;
-    z-index: 1;
-  }
-
-  /* Memastikan teks dan ikon tombol berada di atas lapisan GIF api */
-  .fire-btn-content {
-    position: relative;
-    z-index: 2;
+    mix-blend-mode: screen; /* Menghilangkan background hitam GIF secara transparan */
+    opacity: 0.88;
+    z-index: 20;
+    filter: saturate(1.3) contrast(1.1);
   }
 
   /* Animasi menunjuk untuk tangan ikonik */
@@ -129,7 +123,7 @@
   .fh-4 { animation: floatHeart4 1.3s infinite ease-out 0.5s; }
   .fh-5 { animation: floatHeart5 1.5s infinite ease-out 0.4s; }
 
-  /* KODE UTAMA PEMICU AGAR BACKGROUND GIF TERUS BERGERAK TANPA DI-SCROLL */
+  /* KODE UTAMA PEMICU AGAR BACKGROUND GIF MATRIX TERUS BERGERAK TANPA DI-SCROLL */
   .bg-gif-container {
     position: fixed;
     top: 0;
@@ -227,7 +221,7 @@
 <div style="background-color: #14181c; width: 100%; min-height: 100vh; margin: 0; padding: 0;">
   <section class="relative text-[#9ab] overflow-hidden py-12 md:py-20 px-4 sm:px-6 lg:px-8 font-sans">
     
-    <!-- Background GIF -->
+    <!-- Background GIF Matrix (Sesuai Permintaan, Tidak Diganti) -->
     <div class="bg-gif-container">
       <img 
         src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXc1aXM0dzIwcmhuN3d6d3psOHdnam9hYThyc29yYjMzZG9seTloYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xThuWjALRV2QRodVvy/giphy.gif" 
@@ -382,17 +376,17 @@
                 class="w-full h-auto rounded-xl object-cover transform hover:scale-[1.01] transition-transform duration-500 mb-4"
               />
               
-              <!-- Tombol Letterboxd dengan GIF Api Nyata Berlatar Hitam (Dibersihkan pakai mix-blend-mode: screen) -->
-              <a href="https://letterboxd.com/akmalleon/" target="_blank" rel="noopener noreferrer" class="fire-btn-gif inline-flex items-center justify-center px-6 py-3 text-xs sm:text-sm font-black text-white bg-[#14181c] rounded-xl transition-all duration-300 transform shadow-2xl my-2">
-                <!-- Lapisan GIF Api Berlatar Hitam -->
-                <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnd0MHBkZmpveGN0eHBpdTdnZWkzano2Nmo2cmp6YzVqamN6cGNuNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/nPYlge5WDpgFG/giphy.gif" alt="Real Fire Effect" class="fire-bg-gif" />
+              <!-- 🔥 Tombol Letterboxd Dibungkus Wrapper Api Transparan Menyeluruh -->
+              <div class="fire-wrapper my-2">
+                <!-- Lapisan GIF Api Transparan yang Membakar/Membungkus Luar Tombol -->
+                <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnd0MHBkZmpveGN0eHBpdTdnZWkzano2Nmo2cmp6YzVqamN6cGNuNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/nPYlge5WDpgFG/giphy.gif" alt="Fire Overlay" class="fire-overlay-gif" />
                 
-                <!-- Konten Tombol -->
-                <span class="fire-btn-content flex items-center drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
-                  <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><circle cx="6" cy="12" r="5" fill="#ff4500"/><circle cx="12" cy="12" r="5" fill="#00e054"/><circle cx="18" cy="12" r="5" fill="#00c0ff"/></svg>
+                <a href="https://letterboxd.com/akmalleon/" target="_blank" rel="noopener noreferrer" class="relative z-10 inline-flex items-center justify-center px-6 py-3 text-xs sm:text-sm font-black text-white bg-gradient-to-r from-[#1f1209] to-[#14181c] border-2 border-[#ff6600]/70 rounded-xl transition-all duration-300 transform shadow-[0_0_20px_rgba(255,85,0,0.6)] hover:scale-105">
+                  <svg class="w-4 h-4 mr-2 drop-shadow-[0_0_8px_#ff4500]" fill="currentColor" viewBox="0 0 24 24"><circle cx="6" cy="12" r="5" fill="#ff4500"/><circle cx="12" cy="12" r="5" fill="#00e054"/><circle cx="18" cy="12" r="5" fill="#00c0ff"/></svg>
                   Mampir ke Letterboxd-ku
-                </span>
-              </a>
+                </a>
+              </div>
+
             </div>
           </div>
         </div>
@@ -414,7 +408,7 @@
         <!-- Poster Grid with GIF Hover Preview -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mt-8">
           
-          <!-- 1. Oldboy (Neon Merah Dihilangkan Sesuai Permintaan) -->
+          <!-- 1. Oldboy (Neon Merah Dihilangkan Sesuai Permintaan Sebelumnya) -->
           <div class="relative group transition-all duration-300 transform hover:-translate-y-1.5 mt-4 sm:mt-0 w-full">
             
             <a href="https://id.wikipedia.org/wiki/Lionel_Messi" target="_blank" rel="noopener noreferrer" class="absolute -top-[1.65rem] right-0 z-40 transform hover:scale-125 transition-transform cursor-pointer" title="(Greatest of All Time) pssst coba kamu bisa klik kambing ini">
