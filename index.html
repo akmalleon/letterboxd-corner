@@ -155,7 +155,7 @@
   .fh-4 { animation: floatHeart4 1.3s infinite ease-out 0.5s; }
   .fh-5 { animation: floatHeart5 1.5s infinite ease-out 0.4s; }
 
-  /* KODE UTAMA PEMICU AGAR BACKGROUND GIF TERUS BERGERAK TANPA DI-SCROLL (Opacity dinaikkan ~30% dari 0.2 menjadi 0.26) */
+  /* KODE UTAMA PEMICU AGAR BACKGROUND GIF TERUS BERGERAK TANPA DI-SCROLL */
   .bg-gif-container {
     position: fixed;
     top: 0;
@@ -175,11 +175,11 @@
     object-fit: cover;
     transform: scale(1.05) translate3d(0, 0, 0);
     filter: blur(4px);
-    opacity: 0.26;
+    opacity: 0.2;
     animation: preventFreeze 1s infinite linear;
   }
   @keyframes preventFreeze {
-    0%, 100% { opacity: 0.26; }
+    0%, 100% { opacity: 0.2; }
   }
 
   /* Vinyl player mengikuti scroll */
@@ -272,14 +272,14 @@
 <div style="background-color: #14181c; width: 100%; min-height: 100vh; margin: 0; padding: 0;">
   <section class="relative text-[#9ab] overflow-hidden py-12 md:py-20 px-4 sm:px-6 lg:px-8 font-sans">
     
-    <!-- Background GIF (Updated URL & Increased Opacity ~30%) -->
+    <!-- Background GIF (Updated) -->
     <div class="bg-gif-container">
       <img 
-        src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXc1aXM0dzIwcmhuN3d6d3psOHdnam9hYThyc29yYjMzZG9seTloYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/AOSwwqVjNZlDO/giphy.gif" 
+        src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXc1aXM0dzIwcmhuN3d6d3psOHdnam9hYThyc29yYjMzZG9seTloYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xThuWjALRV2QRodVvy/giphy.gif" 
         alt="Background GIF" 
         loading="eager"
       />
-      <div style="position: absolute; inset: 0; background: linear-gradient(to top, #14181c, rgba(20,24,28,0.88), rgba(20,24,28,0.65));"></div>
+      <div style="position: absolute; inset: 0; background: linear-gradient(to top, #14181c, rgba(20,24,28,0.9), rgba(20,24,28,0.7));"></div>
     </div>
 
     <!-- Ambient background glow matching Letterboxd signature colors -->
